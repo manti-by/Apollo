@@ -1,10 +1,11 @@
-from app import db
+from datetime import timedelta
+from app import app, db
 from models import Record
 from utils import get_onewire_value
 from celery.decorators import periodic_task
 
 
-@periodic_task(run_every=timedelta(seconds=1))
+@periodic_task(run_every=timedelta(seconds=app.config['WORKER_FREQUENCY']))
 def get_sensor_data():
     try:
         data = {

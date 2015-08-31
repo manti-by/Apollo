@@ -2,10 +2,9 @@ import logging
 import RPi.GPIO as GPIO
 from flask import Flask, jsonify, request
 from logging.handlers import FileHandler
+from flask.ext.sqlalchemy import SQLAlchemy
 
-from models import Record
-from utils import get_onewire_value, init_celery
-
+from utils import init_celery
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -17,13 +16,9 @@ celery = init_celery(app)
 @app.route("/")
 def index():
     try:
-        Record
         result = {
             'status'    : 200,
-            'result'    : {
-                'term_01' : get_onewire_value(app.config['TERM_01']),
-                'term_02' : get_onewire_value(app.config['TERM_02'])
-            }
+            'result'    : 'Server working'
         }
     except Exception as e:
         result = {

@@ -1,17 +1,23 @@
 import logging
 import RPi.GPIO as GPIO
 from flask import Flask, jsonify, request
+from logging.handlers import FileHandler
 
-from utils import get_onewire_value
+from models import Record
+from utils import get_onewire_value, init_celery
 
 
 app = Flask(__name__)
 app.config.from_object('config')
 
+db = SQLAlchemy(app)
+celery = init_celery(app)
+
 
 @app.route("/")
 def index():
     try:
+        Record
         result = {
             'status'    : 200,
             'result'    : {
@@ -44,6 +50,11 @@ def shutdown():
 
 
 if __name__ == "__main__":
+    log_handler = FileHandler(app.config['LOG_FILE'])
+    log_handler.setLevel(logging.ERROR)
+    app.logger.addHandler(log_handler)
+    
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(app.config['TERM_INPUT'], GPIO.IN)
+    
     app.run(host=app.config['HOST'], debug=app.config['DEBUG'])

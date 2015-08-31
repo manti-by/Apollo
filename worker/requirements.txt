@@ -1,3 +1,5 @@
 Flask==0.10.1
 Flask-SQLAlchemy==2.0
 RPi.GPIO==0.5.11
+celery==3.1.18
+kombu-sqlalchemy==1.1.0

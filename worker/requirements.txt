@@ -1,2 +1,6 @@
+Flask==0.10.1
+Flask-Migrate==1.5.1
+Flask-SQLAlchemy==2.0
+MySQL-python==1.2.5
 SQLAlchemy==1.0.8
 RPi.GPIO==0.5.11

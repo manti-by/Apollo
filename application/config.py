@@ -1,8 +1,4 @@
-DEBUG = True
-HOST = '0.0.0.0'
-
-LOG_FILE = 'app.log'
-
-SQLALCHEMY_DATABASE_URI = 'mysql://pibot:P1B0t@192.168.1.2/pibot'
+WORKER_URL = 'http://192.168.1.10:5000'
+WORKER_FREQUENCY = 5
 
 from locals import *

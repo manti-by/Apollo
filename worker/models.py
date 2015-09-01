@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Float, SmallInteger, DateTime, func
+from sqlalchemy import Column, Integer, Float, SmallInteger, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -17,7 +17,7 @@ class Record(Base):
     
     water_sensor = Column(SmallInteger, default = 0)
     
-    timestamp = Column(DateTime, server_default=func.now())
+    timestamp = Column(DateTime)
 
     def __repr__(self):
         return '<Record #%d>' % (self.id)

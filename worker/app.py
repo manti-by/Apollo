@@ -1,42 +1,56 @@
-import random
 import logging
-from config import *
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from models import Record
-from utils import get_onewire_value
+from logging import FileHandler
+from flask import Flask, jsonify, request
+from flask.ext.sqlalchemy import SQLAlchemy
 
 
-# Setup logging
-logging.basicConfig(level = logging.ERROR, filename = LOG_FILE)
+app = Flask(__name__)
+app.config.from_object('config')
+db = SQLAlchemy(app)
 
-# Setup database engine
-engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
-session = sessionmaker(bind=engine)
+
+@app.route("/")
+def index():
+    try:
+        from models import Record
+        record = Record.query.order_by('-timestamp').first()
+        if record:
+            result = {
+                'status'    : 200,
+                'result'    : record._asdict()
+            }
+        else:
+            result = {
+                'status'    : 401,
+                'message'   : 'There are no records found'
+            }
+    except Exception as e:
+        result = {
+            'status'    : 500,
+            'message'   : e.message
+        }
+    return jsonify(result)
+
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        return jsonify({
+            'status'    : 500,
+            'message'   : 'Not running with the Werkzeug Server'
+        })
+
+    func()
+    return jsonify({
+        'status'    : 200,
+        'message'   : 'Server shutting down...'
+    })
 
 
 if __name__ == "__main__":
-    try:
-        if IS_RPI:
-            import RPi.GPIO as GPIO
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(TERM_INPUT, GPIO.IN)
-            data = {
-                'term_01' : get_onewire_value(TERM_01),
-                'term_02' : get_onewire_value(TERM_02)
-            }
-        else:
-            data = {
-                'term_01' : random.uniform(21.5, 79.1),
-                'term_02' : random.uniform(55.1, 92.5)
-            }
+    log_handler = FileHandler(app.config['LOG_FILE'])
+    log_handler.setLevel(logging.ERROR)
+    app.logger.addHandler(log_handler)
 
-        # Store data into DB
-        r = Record(**data)
-        session.add(r)
-        session.commit()
-        logging.info('Record processed')
-    except Exception as e:
-        logging.error(e.message)
+    app.run(host=app.config['HOST'])

@@ -23,13 +23,13 @@ Installation:
 
 4. Install application requirements:
 
-    $ source application/bin/activate
-    $ pip install -r application/requirements.txt
+    $ source ~/venv/application/bin/activate
+    $ pip install -r ~/pibot/application/requirements.txt
 
 5. Install worker requirements:
 
-    $ source worker/bin/activate
-    $ pip install -r worker/requirements.txt
+    $ source ~/venv/worker/bin/activate
+    $ pip install -r ~/pibot/worker/requirements.txt
 
 6. Run server:
 
@@ -37,4 +37,4 @@ Installation:
 
 7. Add worker crontab:
 
-    1/60 * * * *    python worker/app.py
+    1/60 * * * *    ~/venv/worker/bin/python ~/pibot/worker/worker.py

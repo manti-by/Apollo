@@ -11,30 +11,35 @@ Installation:
 
     $ sudo apt-get install -y python-dev libmysqlclient-dev
 
-2. Install and create virtualenv:
+2. Install and create virtualenv on RPI:
 
     $ sudo apt-get install -y python-virtualenv
     $ mkdir ~/venv && cd ~/venv
-
-3. Create virtualenvs:
-
-    $ virtualenv --no-site-packages application
     $ virtualenv --no-site-packages worker 
 
-4. Install application requirements:
+3. Install application GTK+ library:
 
-    $ source ~/venv/application/bin/activate
-    $ pip install -r ~/pibot/application/requirements.txt
+    $ sudo add-apt-repository ppa:gnome3-team/gnome3
+    $ sudo add-apt-repository ppa:gnome3-team/gnome3-staging
+    $ sudo add-apt-repository ppa:ubuntuhandbook1/corebird
 
-5. Install worker requirements:
+    $ sudo apt-get update
+    $ sudo apt-get install corebird
+    $ sudo add-apt-repository -r ppa:gnome3-team/gnome3-staging
+
+4. Install worker requirements:
 
     $ source ~/venv/worker/bin/activate
     $ pip install -r ~/pibot/worker/requirements.txt
 
-6. Run server:
+5. Run server:
 
-    $ python app.py
+    $ python ~/pibot/worker/app.py
 
-7. Add worker crontab:
+6. Add worker crontab:
 
     1/60 * * * *    ~/venv/worker/bin/python ~/pibot/worker/worker.py
+    
+7. Run notifier:
+
+    $ python ~/pibot/application/app.py

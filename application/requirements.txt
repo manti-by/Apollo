@@ -1,2 +1,4 @@
 Flask==0.10.1
+Flask-Migrate==1.5.1
 Flask-SQLAlchemy==2.0
+MySQL-python==1.2.5

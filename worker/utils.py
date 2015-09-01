@@ -1,8 +1,6 @@
 import time
 import subprocess
 
-from celery import Celery
-
 
 def get_onewire_value(id):
     '''
@@ -26,17 +24,4 @@ def get_onewire_value(id):
         time.sleep(0.02)
         tries += 1
     return temp
-    
-
-def init_celery(app):
-    celery = Celery(app.import_name, broker=app.config['CELERY_RESULT_DBURI'])
-    celery.conf.update(app.config)
-    TaskBase = celery.Task
-    class ContextTask(TaskBase):
-        abstract = True
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return TaskBase.__call__(self, *args, **kwargs)
-    celery.Task = ContextTask
-    return celery
 

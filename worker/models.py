@@ -1,18 +1,23 @@
-from app import db
+from sqlalchemy import Column, Integer, Float, SmallInteger, DateTime, func
+from sqlalchemy.ext.declarative import declarative_base
 
 
-class Record(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+Base = declarative_base()
+
+class Record(Base):
+    __tablename__ = 'record'
+
+    id = Column(Integer, primary_key = True)
     
-    term_01 = db.Column(db.Float, default = 0.0)
-    term_02 = db.Column(db.Float, default = 0.0)
-    term_03 = db.Column(db.Float, default = 0.0)
-    term_04 = db.Column(db.Float, default = 0.0)
-    term_05 = db.Column(db.Float, default = 0.0)
+    term_01 = Column(Float, default = 0.0)
+    term_02 = Column(Float, default = 0.0)
+    term_03 = Column(Float, default = 0.0)
+    term_04 = Column(Float, default = 0.0)
+    term_05 = Column(Float, default = 0.0)
     
-    water_sensor = db.Column(db.SmallInteger, default = 0)
+    water_sensor = Column(SmallInteger, default = 0)
     
-    timestamp = db.Column(db.DateTime, server_default=db.func.now())
+    timestamp = Column(DateTime, server_default=func.now())
 
     def __repr__(self):
         return '<Record #%d>' % (self.id)

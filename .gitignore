@@ -3,3 +3,11 @@
 *~
 __pycache__
 .DS_Store
+
+application/app.log
+application/locals.py
+
+worker/app.log
+worker/locals.py
+worker/celerybeat-schedule
+worker/celerybeat.pid

@@ -4,8 +4,6 @@ from config import *
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from celery import Celery
-from celery.schedules import crontab
 
 from models import Record
 from utils import get_onewire_value
@@ -14,22 +12,12 @@ from utils import get_onewire_value
 # Setup logging
 logging.basicConfig(level = logging.ERROR, filename = LOG_FILE)
 
-
 # Setup database engine
 engine = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
 session = sessionmaker(bind=engine)
 
 
-# Setup Celery
-celery = Celery(__name__, broker=BROKER_URL)
-CELERYBEAT_SCHEDULE = {
-    'worker': {
-        'task'      : 'get_sensor_data',
-        'schedule'  : crontab()
-    },
-}
-
-def get_sensor_data():
+if __name__ == "__main__":
     try:
         if IS_RPI:
             import RPi.GPIO as GPIO

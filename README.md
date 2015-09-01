@@ -31,10 +31,10 @@ Installation:
     $ source worker/bin/activate
     $ pip install -r worker/requirements.txt
 
-7. Run server:
+6. Run server:
 
     $ python app.py
 
-8. Run worker:
+7. Add worker crontab:
 
-    $ celery beat -A app
+    1/60 * * * *    python worker/app.py

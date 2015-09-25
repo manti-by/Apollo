@@ -3,10 +3,15 @@
 <head>
     <title>PiBot Panel</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery-2.1.4.min.js') }}"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content">
+        {% block content %}
+            <h1>Apollo App Dashboard</h1>
+            <div id="charts"></div>
+        {% endblock %}
+    </div>
 </body>
 </html>

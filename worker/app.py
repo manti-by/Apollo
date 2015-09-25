@@ -1,6 +1,6 @@
 import logging
 from logging import FileHandler
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
@@ -11,6 +11,11 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
+    return render_template('base.html')
+
+
+@app.route("/data")
+def data():
     try:
         from models import Record
         record = Record.query.order_by('-timestamp').first()

@@ -9,7 +9,7 @@ Installation:
 
 1. Install system libraries:
 
-    $ sudo apt-get install -y python-dev libmysqlclient-dev
+    $ sudo apt-get install -y python-dev libmysqlclient-dev python-smbus
 
 2. Install and create virtualenv on RPI:
 

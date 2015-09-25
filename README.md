@@ -1,4 +1,4 @@
-Pibot App
+Apollo App
 ==========================================================
 
 Paspberry Pi App
@@ -30,16 +30,16 @@ Installation:
 4. Install worker requirements:
 
     $ source ~/venv/worker/bin/activate
-    $ pip install -r ~/pibot/worker/requirements.txt
+    $ pip install -r ~/apollo/worker/requirements.txt
 
 5. Run server:
 
-    $ python ~/pibot/worker/app.py
+    $ python ~/apollo/worker/app.py
 
 6. Add worker crontab:
 
-    1/60 * * * *    ~/venv/worker/bin/python ~/pibot/worker/worker.py
+    1/60 * * * *    ~/venv/worker/bin/python ~/apollo/worker/worker.py
     
 7. Run notifier:
 
-    $ python ~/pibot/application/app.py
+    $ python ~/apollo/application/app.py

@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from models import Record
-from utils import get_onewire_value
+from library.onewire import get_onewire_value
 
 
 # Setup logging

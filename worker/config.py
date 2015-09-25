@@ -8,6 +8,6 @@ TERM_INPUT = 7
 TERM_01 = '000007173569'
 TERM_02 = '000007177269'
 
-SQLALCHEMY_DATABASE_URI = 'mysql://pibot:P1B0t@192.168.1.2/pibot'
+SQLALCHEMY_DATABASE_URI = 'mysql://apollo:aP01Lo@192.168.1.2/apollo'
 
 from locals import *

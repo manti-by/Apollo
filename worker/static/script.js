@@ -1,5 +1,5 @@
 // Loading base libraries
-google.load('jquery', '2.1.4');
+google.load('jquery', '1.7.1');
 google.load('visualization', '1.0', {'packages': ['gauge']});
 
 // Set initial callback

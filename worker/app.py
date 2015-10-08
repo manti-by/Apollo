@@ -18,7 +18,7 @@ def index():
 def data():
     try:
         from models import Record
-        record = Record.query.order_by('-timestamp').first()
+        record = Record.objects.order_by('-timestamp').first()
         if record:
             result = {
                 'status'    : 200,

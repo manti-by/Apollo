@@ -1,0 +1,38 @@
+@media only screen and (max-width: 480px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .container.static {
+        width: calc(100% - 32px);
+    }
+
+    .mdl-dialog__title {
+        padding: 1rem 1rem 0;
+        font-size: 1.8em;
+    }
+
+    .mdl-dialog__content {
+        padding: 1em;
+    }
+
+    .mdl-list__item {
+        padding: 0;
+    }
+
+    .mdl-cell {
+        margin: 0 8px;
+    }
+
+    .shot-type .image {
+        width: 35px;
+    }
+
+    .shot-type .quantity {
+        padding: 0;
+    }
+}

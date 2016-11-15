@@ -1,0 +1,40 @@
+{% load static %}
+
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Apollo</span>
+
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+
+        <!-- Navigation. We hide it in small screens. -->
+        <button id="demo-menu-lower-right"
+                class="mdl-button mdl-js-button mdl-button--icon mdl-layout--large-screen-only">
+            <i class="material-icons">more_vert</i>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            for="demo-menu-lower-right">
+                <li class="mdl-menu__item">
+                    <a class="mdl-navigation__link" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="mdl-menu__item">
+                    <a class="mdl-navigation__link" href="{% url 'about' %}">About</a>
+                </li>
+        </ul>
+    </div>
+</header>
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Apollo</span>
+
+    <div class="drawer-menu mdl-navigation">
+        <a class="mdl-navigation__link" href="{% url 'index' %}">
+            <i class="material-icons" role="presentation">home</i>
+            <span>Home</span>
+        </a>
+        <a class="mdl-navigation__link" href="{% url 'about' %}">
+            <i class="material-icons">help_outline</i>
+            <span class="visuallyhidden">About</span>
+        </a>
+    </div>
+</div>

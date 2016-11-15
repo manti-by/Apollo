@@ -1,0 +1,144 @@
+body {
+    font-family: Roboto, Arial, Helvetica, serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+form.login {
+    min-height: 250px;
+}
+
+form .error-holder {
+    color: red;
+}
+
+.shot-image {
+    max-width: 100%;
+}
+
+.empty {
+    padding: 1em 0;
+}
+
+.dialog {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    width: calc(100% - 32px);
+    max-width: 968px;
+    margin: auto;
+    background: #FFF;
+    z-index: 1000;
+}
+
+#open-add-shot-dialog {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    z-index: 900;
+}
+
+#add-shot-dialog {
+}
+
+#add-shot-dialog h5 {
+    margin: 0;
+}
+
+.shot-type .image {
+    width: 50px;
+}
+
+.shot-type .quantity {
+    position: relative;
+    top: -3px;
+    margin: 0;
+    padding: 0 5px;
+}
+
+.shot-type .quantity input {
+    width: 1em;
+    margin: 0;
+    padding: 0.2em 0;
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid #CCC;
+}
+
+.mdl-grid h2 {
+    border-bottom: 1px solid #CCC;
+}
+
+.shot {
+    min-height: 0;
+    border-bottom: 1px solid #CCC;
+}
+
+.shot .date {
+    float: right;
+    padding: 1em 0.5em;
+}
+
+.shot .actions {
+    flex-direction: row-reverse;
+    padding: 0.3em;
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.shot .quantity {
+    position: relative;
+    top: 2px;
+    margin: 0;
+    padding: 0;
+}
+
+.shot .quantity input {
+    width: 1em;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    background: transparent;
+}
+
+.drawer-image {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.drawer-image img {
+    position: absolute;
+    top: -50%;
+    max-width: 100%;
+}
+
+.drawer .email {
+    padding: 0.5em 0;
+    font-size: 1.1em;
+}
+
+.drawer-menu .mdl-navigation__link {
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.drawer-menu .material-icons {
+    margin-right: 1em;
+}

@@ -1,5 +1,5 @@
-Pibot App Changelog
+Apollo App Changelog
 ==========================================================
 
-Pibot app version 0.1
+Apollo app version 0.1
 ----------------------------------------------------------

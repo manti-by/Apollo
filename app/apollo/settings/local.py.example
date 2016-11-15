@@ -1,0 +1,33 @@
+from __future__ import absolute_import, unicode_literals
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'apollo',
+        'USER': 'apollo',
+        'PASSWORD': 'Dalt0nik',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join('var','log','apollo.log')
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

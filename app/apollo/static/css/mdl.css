@@ -1,0 +1,61 @@
+.mdl-mini-footer {
+    background: transparent;
+}
+
+.mdl-mini-footer__link-list {
+    padding-top: 4em;
+}
+
+.mdl-mini-footer__link-list a {
+    padding-right: 1.5em;
+    text-transform: uppercase;
+}
+
+.mdl-card {
+    width: auto;
+}
+
+.mdl-card__media {
+    text-align: center;
+    background-color: transparent;
+}
+
+.mdl-card__actions {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.mdl-card__supporting-text {
+    width: 100%;
+    padding: 0.3em 0;
+}
+
+.mdl-list {
+    margin-bottom: 2em;
+    padding: 0;
+}
+
+.mdl-dialog__content .mdl-list:last-child {
+    margin-bottom: 0;
+}
+
+.mdl-list__item {
+    height: auto;
+    padding: 0 0 0 8px;
+}
+
+.mdl-list__item .mdl-list__item-secondary-content {
+    flex-flow: row;
+}
+
+.mdl-dialog__title {
+    font-size: 2rem;
+}
+
+.mdl-layout__header-row .mdl-menu__item .mdl-navigation__link {
+    padding: 0;
+    text-align: left;
+    line-height: 3.5em;
+    color: inherit;
+}

@@ -1,7 +1,7 @@
 import logging
 
 from django.http import JsonResponse
-from shots.models import Shot
+from api.models import Shot
 
 logger = logging.getLogger('app')
 

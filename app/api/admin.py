@@ -1,19 +1,18 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
 
 from api.models import Shot
 
 
-@admin.register(ShotType)
-class ShotTypeAdmin(admin.ModelAdmin):
+@admin.register(Shot)
+class ShotAdmin(admin.ModelAdmin):
 
-    list_display = ('icon_image', 'title', 'volume', 'measure', 'degree')
-    ordering = ('title',)
+    list_display = ('created', 'term_01', 'term_02', 'term_03', 'term_04', 'term_05', 'water_sensor')
 
     fieldsets = (
-        (_('Info'), {
-            'fields': ('title', ('volume', 'measure'), 'degree')
+        ('Info', {
+            'fields': ('created', 'water_sensor')
+        }),
+        ('Temperature', {
+            'fields': ('term_01', 'term_02', 'term_03', 'term_04', 'term_05')
         }),
     )

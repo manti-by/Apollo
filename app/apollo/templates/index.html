@@ -3,16 +3,12 @@
 {% load static %}
 
 {% block content %}
-    <h1>Apollo App Dashboard</h1>
-    <div class="container chart-list">
-        <div id="chart_01" class="chart"></div>
-        <div id="chart_02" class="chart"></div>
-        <div id="chart_03" class="chart"></div>
-        <div id="chart_04" class="chart"></div>
-        <div id="chart_05" class="chart"></div>
-    </div>
-
-    <div id="dialog" class="mdl-dialog dialog hidden">
-        <div class="mdl-dialog__content content"></div>
+    <div class="mdl-grid">
+        <h2 class="mdl-cell mdl-cell--12-col">Apollo App Dashboard</h2>
+        <div id="chart_01" class="chart mdl-cell mdl-cell--4-col"></div>
+        <div id="chart_02" class="chart mdl-cell mdl-cell--4-col"></div>
+        <div id="chart_03" class="chart mdl-cell mdl-cell--4-col"></div>
+        <div id="chart_04" class="chart mdl-cell mdl-cell--4-col"></div>
+        <div id="chart_05" class="chart mdl-cell mdl-cell--4-col"></div>
     </div>
 {% endblock %}

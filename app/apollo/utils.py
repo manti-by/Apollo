@@ -37,21 +37,15 @@ utc = UTC()
 def test():
     try:
         clear_display(settings.DISPLAY_OUTPUT)
-
         level = read_spi_channel(settings.MOISTURE_INPUT)
-        print level
-
-        data = {
+        draw_display({
             'term_01': 90.2,
             'term_02': 87.5,
             'term_03': 34.2,
             'term_04': 29.2,
             'term_05': 7.2,
-            'water_sensor': 1
-        }
-
-        draw_display(data, settings.DISPLAY_OUTPUT)
-
+            'water_sensor': level
+        }, settings.DISPLAY_OUTPUT)
         logging.info('Record processed')
     except Exception as e:
         logging.error(e.message)

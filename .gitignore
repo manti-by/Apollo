@@ -11,3 +11,4 @@ log/
 app/static/
 app/media/
 app/cache/
+app/app.log

@@ -10,8 +10,9 @@ urlpatterns = [
     url(r'^$', home_page, name='index'),
     url(r'^about$', static_page, {'page': 'about'}, name='about'),
 
-    # Shot urls
+    # Shot list
     url(r'^api/?$', ApiResource.as_view()),
+
     # Admin urls
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),

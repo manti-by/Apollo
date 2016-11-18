@@ -15,7 +15,11 @@ class Shot(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '#%d' % self.pk
+        return self.title
+
+    @property
+    def title(self):
+        return '%s %s/%s' % (self.human_date, self.term_01, self.term_02)
 
     @property
     def human_date(self):
@@ -32,7 +36,6 @@ class Shot(models.Model):
             return self.created.strftime('%b %d')
 
     def as_dict(self):
-        text = '%s %s/%s' % (self.human_date, self.term_01, self.term_02)
-        return {'id': self.id, 'date': self.human_date, 'text': text,
+        return {'id': self.id, 'date': self.human_date, 'text': self.title,
                 'term_01': self.term_01, 'term_02': self.term_02, 'term_03': self.term_03,
                 'term_04': self.term_04, 'term_05': self.term_05, 'water_sensor': self.water_sensor}

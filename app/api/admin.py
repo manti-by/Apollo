@@ -10,9 +10,6 @@ class ShotAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Info', {
-            'fields': ('created', 'water_sensor')
-        }),
-        ('Temperature', {
-            'fields': ('term_01', 'term_02', 'term_03', 'term_04', 'term_05')
+            'fields': ('term_01', 'term_02', 'term_03', 'term_04', 'term_05', 'water_sensor')
         }),
     )

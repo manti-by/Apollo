@@ -16,7 +16,7 @@ def home_page(request):
 
 def static_page(request, page):
     try:
-        return render_to_response('static/%s.html' % page)
+        return render_to_response('%s.html' % page)
     except Exception as e:
         logger.exception(e)
         raise Http404

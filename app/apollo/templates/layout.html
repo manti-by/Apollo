@@ -26,39 +26,27 @@
         <meta name="msapplication-TileColor" content="#2F3BA2">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto:300,400,700&subset=cyrillic">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-
-        <link rel="stylesheet" type="text/css" href="{% static 'css/mdl.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/phone.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/phablet.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/tablet.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/notebook.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive/desktop.css' %}">
     </head>
     <body>
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            {% include 'common/header.html' %}
-            <main class="mdl-layout__content">
+        <header>
+            <div class="container">
+                <div class="wrapper">
+                    <a href="{% url 'index' %}">Apollo</a>
+                    <a href="{% url 'about' %}" class="about">About</a>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <main class="wrapper">
                 {% block content %}
                     404 Not Found
                 {% endblock %}
-                <footer class="mdl-mini-footer mdl-layout--large-screen-only">
-                    {% include 'common/footer.html' %}
-                </footer>
             </main>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.2.1/material.min.js"></script>
-
-        <script src="{% static 'js/base/base.model.js' %}"></script>
-        <script src="{% static 'js/base/base.view.js' %}"></script>
-
-        <script src="{% static 'js/common.js' %}"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="{% static 'js/index.js' %}"></script>
-
-        {% include 'handlebars.html' %}
     </body>
 </html>

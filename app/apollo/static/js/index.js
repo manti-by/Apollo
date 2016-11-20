@@ -57,6 +57,8 @@
 
         console_info('Charts inited');
 
+        var prev = {term_01: 0, term_02: 0, term_03: 0, term_04: 0, term_05: 0},
+            message = [];
         setInterval(function() {
             $.get('/api?latest=1', function(response) {
                 if (response['status'] == 200) {
@@ -72,11 +74,28 @@
                     data_05.setValue(0, 1, response['data']['term_05']);
                     chart_05.draw(data_05, water_temp_options);
 
-                    console_info('Data updated');
+                    if (prev['term_01'] && prev['term_01'] != response['data']['term_01'])
+                        message.push(1);
+                    if (prev['term_02'] && prev['term_02'] != response['data']['term_02'])
+                        message.push(2);
+                    if (prev['term_03'] && prev['term_03'] != response['data']['term_03'])
+                        message.push(3);
+                    if (prev['term_04'] && prev['term_04'] != response['data']['term_04'])
+                        message.push(4);
+                    if (prev['term_05'] && prev['term_05'] != response['data']['term_05'])
+                        message.push(5);
+
+                    if (message.length) {
+                        console_info('Sensors ' + message.join(', ') + ' changed;');
+                        console.scrollTop(200);
+                    }
+
+                    prev = response['data'];
+                    message = [];
                 } else {
                     console_error(response['message']);
                 }
             });
-        }, 60000);
+        }, 5000);
     });
 })(jQuery);

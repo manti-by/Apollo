@@ -1,5 +1,3 @@
-import os
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -45,3 +43,5 @@ LOGGING = {
         },
     },
 }
+
+ALLOWED_HOSTS = ['192.168.0.112', 'rpi']

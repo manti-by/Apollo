@@ -6,11 +6,11 @@ from apollo.utils import utc
 
 class Shot(models.Model):
 
-    term_01 = models.DecimalField(default=0.0, max_digits=3, decimal_places=5)
-    term_02 = models.DecimalField(default=0.0, max_digits=3, decimal_places=5)
-    term_03 = models.DecimalField(default=0.0, max_digits=3, decimal_places=5)
-    term_04 = models.DecimalField(default=0.0, max_digits=3, decimal_places=5)
-    term_05 = models.DecimalField(default=0.0, max_digits=3, decimal_places=5)
+    term_01 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
+    term_02 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
+    term_03 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
+    term_04 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
+    term_05 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
     water_sensor = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 

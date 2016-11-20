@@ -8,7 +8,7 @@ Installation:
 1. Install system libraries:
 
         $ sudo apt-get install -y zip nginx supervisor postgresql
-        $ sudo apt-get install -y python-pip python-dev python-virtualenv libpq-dev python-smbus
+        $ sudo apt-get install -y python-pip python-dev python-virtualenv libpq-dev libjpeg-dev libjpeg8-dev python-smbus
 
 2. Clone source and install app requirements:
 

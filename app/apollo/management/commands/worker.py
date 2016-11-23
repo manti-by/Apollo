@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 'term_04': read_onewire_channel(settings.TERM_04),
                 'term_05': read_onewire_channel(settings.TERM_05),
                 'water_sensor': read_spi_channel(settings.MOISTURE_INPUT),
-                'timestamp': datetime.now()
+                'created': datetime.now()
             }
 
             # Store data into DB

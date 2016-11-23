@@ -31,6 +31,16 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'sensors': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'worker': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
         'django': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',

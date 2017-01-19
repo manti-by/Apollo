@@ -18,7 +18,7 @@ class ApiResource(Resource):
                                      'message': 'No data'}, status=200)
         else:
             data = []
-            for s in Shot.objects.all():
+            for s in Shot.objects.all()[:20]:
                 data.append(s.as_dict())
         return JsonResponse({'status': 200,
                              'data': data}, status=200)

@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-from __future__ import absolute_import, unicode_literals
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -128,8 +126,6 @@ BUZZER_OUTPUT = 18
 MOISTURE_INPUT = 5
 DISPLAY_OUTPUT = 24
 
-TERM_01 = '0000071766e4'
-TERM_02 = '000007176e41'
+TERM_01 = '000007173569'
+TERM_02 = '000007177269'
 TERM_03 = '000007177269'
-TERM_04 = None
-TERM_05 = None

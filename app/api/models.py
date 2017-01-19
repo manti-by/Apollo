@@ -9,8 +9,6 @@ class Shot(models.Model):
     term_01 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
     term_02 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
     term_03 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
-    term_04 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
-    term_05 = models.DecimalField(default=0.0, max_digits=8, decimal_places=5)
     water_sensor = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -38,4 +36,4 @@ class Shot(models.Model):
     def as_dict(self):
         return {'id': self.id, 'date': self.human_date, 'text': self.title,
                 'term_01': self.term_01, 'term_02': self.term_02, 'term_03': self.term_03,
-                'term_04': self.term_04, 'term_05': self.term_05, 'water_sensor': self.water_sensor}
+                 'water_sensor': self.water_sensor}

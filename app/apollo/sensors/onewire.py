@@ -6,6 +6,9 @@ logger = logging.getLogger('sensors')
 
 
 def read_channel(channel):
+    if channel is None:
+        return -1
+
     crc_ok = False
     tries = 0
     temp = None

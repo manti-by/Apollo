@@ -89,7 +89,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 LANGUAGE_CODE = 'en'
-
 LANGUAGES = (
     ('en', 'English'),
 )
@@ -97,13 +96,9 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'apollo', 'locale'),
 )
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -133,8 +128,8 @@ BUZZER_OUTPUT = 18
 MOISTURE_INPUT = 5
 DISPLAY_OUTPUT = 24
 
-TERM_01 = '000007173569'
-TERM_02 = '000007177269'
+TERM_01 = '0000071766e4'
+TERM_02 = '000007176e41'
 TERM_03 = '000007177269'
-TERM_04 = '000007177269'
-TERM_05 = '000007177269'
+TERM_04 = None
+TERM_05 = None

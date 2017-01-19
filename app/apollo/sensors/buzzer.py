@@ -8,7 +8,7 @@ logger = logging.getLogger('sensors')
 def buzzer_short_low(channel_id):
     try:
         buzzer = GPIO.PWM(channel_id, 400)
-        buzzer.start()
+        buzzer.start(20)
         time.sleep(0.1)
         buzzer.stop()
     except Exception as e:
@@ -29,7 +29,7 @@ def buzzer_double_short_low(channel_id):
 def buzzer_long_low(channel_id):
     try:
         buzzer = GPIO.PWM(channel_id, 400)
-        buzzer.start()
+        buzzer.start(20)
         time.sleep(0.5)
         buzzer.stop()
     except Exception as e:

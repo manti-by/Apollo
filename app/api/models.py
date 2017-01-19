@@ -36,4 +36,4 @@ class Shot(models.Model):
     def as_dict(self):
         return {'id': self.id, 'date': self.human_date, 'text': self.title,
                 'term_01': self.term_01, 'term_02': self.term_02, 'term_03': self.term_03,
-                 'water_sensor': self.water_sensor}
+                'water_sensor': self.water_sensor}

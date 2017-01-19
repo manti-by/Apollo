@@ -7,4 +7,6 @@ django-simple-rest>=1.4,<1.5
 Pillow==3.3.0
 RPi.GPIO==0.5.11
 Spidev==3.0
+Adafruit_BBIO==1.0.1
 -e git://github.com/manti-by/Adafruit_Python_SSD1306.git#egg=Adafruit_SSD1306
+-e git://github.com/manti-by/Adafruit_Python_ILI9341.git#egg=Adafruit_ILI9341

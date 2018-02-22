@@ -4,11 +4,7 @@
 __pycache__
 .DS_Store
 
-.idea/
-.vagrant/
-
-log/
-app/static/
-app/media/
-app/cache/
-app/app.log
+server/apollo/settings/local.py
+server/static/
+server/media/
+server/cache/

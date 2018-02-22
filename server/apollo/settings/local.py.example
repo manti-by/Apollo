@@ -3,11 +3,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'apollo',
         'USER': 'apollo',
-        'PASSWORD': 'Dalt0nik',
+        'PASSWORD': 'pa55word',
         'HOST': 'localhost',
         'PORT': '',
     }
 }
+
 
 LOGGING = {
     'version': 1,
@@ -16,7 +17,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'app.log',
+            'filename': os.path.join('var','log','apollo.log'),
         },
         'console': {
             'class': 'logging.StreamHandler',

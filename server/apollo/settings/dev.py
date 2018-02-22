@@ -16,7 +16,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'apollo',
         'USER': 'apollo',
-        'PASSWORD': 'Dalt0nik',
+        'PASSWORD': 'pa55word',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -58,7 +58,6 @@ LOGGING = {
         },
     },
 }
-
 
 
 try:

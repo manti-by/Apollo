@@ -57,15 +57,14 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 Client Setup (Arduino Nano V3.0 ATmega328P)
 -------------------------------------------
 
-1. Download the Arduino Software and install
+1. Install Arduino system libraries 
 
-        $ wget https://downloads.arduino.cc/arduino-1.8.5-linux64.tar.xz
-        $ tar -xJf arduino-1.8.5-linux64.tar.xz
-        $ cd arduino-1.8.5/
-        $ ./install.sh
+        $ sudo apt-get install arduino arduino-core arduino-mk
 
 
 2. Clone sources, compile firmware and upload to Arduino 
 
         $ git clone git@github.com:manti-by/Apollo.git
         $ cd Apollo/client/
+        $ make
+        $ make upload

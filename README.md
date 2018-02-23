@@ -5,13 +5,14 @@ Apollo IoT App
 Server setup (Raspberry Pi 3 Model B)
 -------------------------------------
 
-NOTE: You can simply run setup_server.sh on your Raspberry PI
+NOTE: You can simply run setup_server.sh on your Raspberry PI. Also, all commands running from sudo user because we
+need full access to some system sockets to get data from sensors
 
 1. Install libraries on the server
 
-        $ sudo apt-get install -y zip nginx supervisor postgresql
-        $ sudo apt-get install -y python-pip python-dev python-virtualenv libpq-dev \
-          libjpeg-dev libjpeg8-dev python-smbus
+        $ sudo apt-get install -y git zip nginx supervisor postgresql
+        $ sudo apt-get install -y python-pip python-dev python-virtualenv build-essential \
+          python-smbus python-numpy python-imaging libpq-dev libjpeg-dev libjpeg8-dev
 
 
 3. Setup postgres database
@@ -30,12 +31,16 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
         $ sudo pip install -r /home/pi/apollo/server/requirements.txt
         $ cp /home/pi/apollo/server/apollo/settings/local.py.example /home/pi/apollo/server/apollo/settings/local.py
 
+NOTE: If you have problem with installing some packages, try this command or something like
+
+        $ sudo pip install uwsgi --index-url=https://pypi.python.org/simple/
+
 
 4. Migrate and collect static files
 
-        $ /home/pi/apollo/server/manage.py migrate
-        $ /home/pi/apollo/server/manage.py collectstatic -v 0 --no-input
-        $ echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | /home/pi/apollo/server/manage.py shell
+        $ sudo /home/pi/apollo/server/manage.py migrate
+        $ sudo /home/pi/apollo/server/manage.py collectstatic -v 0 --no-input
+        $ echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | sudo /home/pi/apollo/server/manage.py shell
 
 
 5. Update server configs and start it

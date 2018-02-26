@@ -11,7 +11,7 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 
         $ sudo apt-get install -y zip nginx supervisor postgresql
         $ sudo apt-get install -y python3-pip python3-dev python3-virtualenv libpq-dev \
-          libjpeg-dev libjpeg8-dev python-smbus
+            libjpeg-dev libjpeg8-dev python-smbus
 
 
 2. Clone sources, install app requirements and setup local config
@@ -58,10 +58,12 @@ Android client setup
 
 1. Install Kivy framework
 
-        $ sudo apt-get install -y python-dev cython mesa-common-dev libgl1-mesa-dev
-        $ virtualenv -p python3 --no-site-packages --prompt="apollo-client-" venv/client 
-        $ pip install -r client/requirements.txt
-        
+        $ sudo apt-get install -y python3-dev python3-pip cython mesa-common-dev libgl1-mesa-dev
+        $ sudo apt install ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+            libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev
+        $ sudo apt-get install -y libgstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good
+        $ sudo pip3 install -r client/requirements.txt
+
 
 2. Build Android app with Buildozer and run it
 

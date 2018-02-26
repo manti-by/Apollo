@@ -5,23 +5,26 @@ from kivy.uix.gridlayout import GridLayout
 
 
 class IoTClient(App):
-    title = 'IoT Client'
-    icon = 'icon.png'
+    title = 'Apollo IoT Client'
+    icon = 'assets/icon.png'
 
     def build(self):
-        layout = GridLayout(cols=2)
         initial_data = {
-            'Guest Room': {'temp': 22.5, 'humidity': 75.2},
-            'Bedroom': {'temp': 25.1, 'humidity': 94.9},
-            'Work Room': {'temp': 20.8, 'humidity': 55.7}
+            'Guest Room': {'temp': 22.5, 'humidity': 62.2},
+            'Work Room': {'temp': 20.8, 'humidity': 55.7},
+            'Bedroom': {'temp': 21.1, 'humidity': 57.1},
+            'Bathroom': {'temp': 25.1, 'humidity': 94.9},
+            '2nd Floor': {'temp': 23.7, 'humidity': 69.3},
         }
-        for room, data in initial_data:
-            cell = GridLayout(rows=2)
+        layout = GridLayout(cols=1)
+        for room, data in initial_data.items():
+            cell = GridLayout(cols=2)
             cell.add_widget(Label(text=room))
-            cell.add_widget(Label(text='T: {}{}C, H: {}%'.format(data['temp'], chr(223), data['humidity'])))
+            cell.add_widget(Label(text='T: {0:.0f}{1}C, H: {2:.0f}%'.format(data['temp'], chr(176), data['humidity'])))
             layout.add_widget(cell)
         layout.add_widget(Button(text='Refresh'))
         return layout
 
 
-IoTClient().run()
+if __name__ == '__main__':
+    IoTClient().run()

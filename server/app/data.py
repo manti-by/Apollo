@@ -56,7 +56,7 @@ class DB:
         result = {}
         for sensor in settings['sensors']:
             value = self.db.search(where('id') == sensor['mac'])[0]
-            result[sensor['mac']] = {'temp': value['temp'],
-                                     'humidity': value['humidity'],
-                                     'datetime': value['datetime']}
+            result[sensor['name']] = {'temp': value['temp'],
+                                      'humidity': value['humidity'],
+                                      'datetime': value['datetime']}
         return result

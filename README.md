@@ -10,7 +10,7 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 1. Install libraries on the server
 
         $ sudo apt-get install -y zip nginx supervisor postgresql
-        $ sudo apt-get install -y python-pip python-dev python-virtualenv libpq-dev \
+        $ sudo apt-get install -y python3-pip python3-dev python3-virtualenv libpq-dev \
           libjpeg-dev libjpeg8-dev python-smbus
 
 
@@ -51,3 +51,18 @@ Sensor Setup (Arduino Nano V3.0 ATmega328P)
         $ cd Apollo/client/
         $ make
         $ make upload
+
+
+Android client setup
+--------------------
+
+1. Install Kivy framework
+
+        $ sudo apt-get install -y python-dev cython mesa-common-dev libgl1-mesa-dev
+        $ virtualenv -p python3 --no-site-packages --prompt="apollo-client-" venv/client 
+        $ pip install -r client/requirements.txt
+        
+
+2. Build Android app with Buildozer and run it
+
+        $ buildozer android debug deploy run

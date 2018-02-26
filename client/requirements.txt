@@ -1,0 +1,8 @@
+Cython==0.25.2
+Kivy==1.10.0
+buildozer==0.34
+-e git+https://gitlab.com/kivymd/KivyMD.git#egg=KivyMD
+
+# Dev dependencies
+flake8>=3.5.0
+ipython>=5.1.0

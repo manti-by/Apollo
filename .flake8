@@ -1,0 +1,8 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    sensor/
+    deploy/
+max-line-length = 120
+max-complexity = 14

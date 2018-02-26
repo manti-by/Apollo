@@ -1,17 +1,17 @@
 from datetime import datetime
-from tinydb import TinyDB, Query, where
+from tinydb import TinyDB, where
 
-from .conf import settings
-from .utils import get_logger
+from app.conf import settings
+from app.utils import get_logger
 
 logger = get_logger()
 
 
-class Item(Query):
+class Item:
 
     fields = ('id', 'temp', 'humidity', 'datetime',)
 
-    def __init__(self, data: dict):
+    def __init__(self, data):
         self.data = {}
         try:
             if 'id' not in data:
@@ -39,7 +39,7 @@ class Item(Query):
             logger.info(e)
 
     @property
-    def __dict__(self) -> dict:
+    def __dict__(self):
         return self.data
 
 
@@ -48,11 +48,11 @@ class DB:
     def __init__(self):
         self.db = TinyDB(settings['db_path'])
 
-    def add(self, data: dict):
+    def add(self, data):
         item = Item(data)
         self.db.insert(item.__dict__)
 
-    def get(self) -> dict:
+    def get(self):
         result = {}
         for sensor in settings['sensors']:
             value = self.db.search(where('id') == sensor['mac'])[0]

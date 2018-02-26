@@ -1,30 +1,26 @@
-import logging
 import Adafruit_SSD1306
 from PIL import Image, ImageDraw, ImageFont
 
-logger = logging.getLogger('sensors')
 
+class Display:
+    def __init__(self, dc, rst):
+        self.dc = dc
+        self.rst = rst
 
-# Clear display via I2C wire
-def clear(channel):
-    try:
+    # Clear data
+    def clear(self):
         # Initialize library
-        display = Adafruit_SSD1306.SSD1306_128_64(rst=channel)
+        display = Adafruit_SSD1306.SSD1306_128_64(rst=self.rst)
         display.begin()
 
         # Clear display
         display.clear()
         display.display()
-    except Exception as e:
-        logger.error(e.message)
-        return -1
 
-
-# Display data via I2C wire
-def draw(data, channel):
-    try:
+    # Display data via I2C wire
+    def draw(self, data):
         # Initialize library
-        display = Adafruit_SSD1306.SSD1306_128_64(rst=channel)
+        display = Adafruit_SSD1306.SSD1306_128_64(rst=self.rst)
         display.begin()
 
         # Clear display
@@ -51,6 +47,3 @@ def draw(data, channel):
         # Display image
         display.image(image)
         display.display()
-    except Exception as e:
-        logger.error(e.message)
-        return -1

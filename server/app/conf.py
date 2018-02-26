@@ -1,5 +1,6 @@
 settings = {
-    'db_path': '/home/pi/db.json',
+    'db_path': '/home/pi/apollo/db.json',
+    'sensors_path': '/home/pi/apollo/sensors.json',
     'dt_format': '%Y-%m-%d %H:%M',
     'sensors': [{
         'mac': '00:00:00:00:00:00',

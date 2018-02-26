@@ -59,7 +59,7 @@ NOTE: If you have problem with installing some packages, try this command or som
 
 
 
-Client Setup (Arduino Nano V3.0 ATmega328P)
+Sensor Setup (Arduino Nano V3.0 ATmega328P)
 -------------------------------------------
 
 1. Install Arduino system libraries 

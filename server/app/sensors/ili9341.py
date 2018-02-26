@@ -1,12 +1,16 @@
-import logging
+from datetime import datetime
+
 import Adafruit_ILI9341
 import Adafruit_GPIO.SPI as SPI
 from PIL import Image, ImageDraw, ImageFont
 
-logger = logging.getLogger()
+from app.conf import settings
+from app.utils import get_logger
+
+logger = get_logger()
 
 
-class ILI9341Display(object):
+class Display:
 
     def __init__(self, dc, rst):
         self.dc = dc
@@ -15,17 +19,18 @@ class ILI9341Display(object):
     def clear(self):
         try:
             # Initialize library
-            display = Adafruit_ILI9341.ILI9341(self.dc, rst=self.rst, spi=SPI.SpiDev(0, 0, max_speed_hz=64000000))
+            display = Adafruit_ILI9341.ILI9341(self.dc, rst=self.rst,
+                                               spi=SPI.SpiDev(0, 0, max_speed_hz=64000000))
             display.begin()
             display.clear((0, 0, 0))
         except Exception as e:
-            logger.error(e.message)
-            return -1
+            logger.error(e)
 
     def draw(self, data):
         try:
             # Initialize library
-            display = Adafruit_ILI9341.ILI9341(self.dc, rst=self.rst, spi=SPI.SpiDev(0, 0, max_speed_hz=64000000))
+            display = Adafruit_ILI9341.ILI9341(self.dc, rst=self.rst,
+                                               spi=SPI.SpiDev(0, 0, max_speed_hz=64000000))
             display.begin()
             display.clear((0, 0, 0))
 
@@ -36,14 +41,16 @@ class ILI9341Display(object):
             font = ImageFont.load_default()
 
             # Write two lines of text
-            line_01 = ' T1: {} T2: {} T3: {}'.format(data['term_01'], data['term_02'], data['term_03'])
-            line_02 = ' Water level low' if data['water_sensor'] else ' Warning! Change the container'
+            line_01 = ' '
+            for sensor, data in data:
+                line_01 += '{}: {0:.2g}/{:d}  '.format(sensor, data['temp'], data['humidity'])
+
+            dt = datetime.utcnow().strftime(settings['dt_format'])
+            line_02 = ' Updated at {}'.format(dt)
 
             draw.text((2,  2), line_01, font=font, fill=255)
             draw.text((2, 18), line_02, font=font, fill=255)
 
-            # Display image
             display.display(image)
         except Exception as e:
-            logger.error(e.message)
-            return -1
+            logger.error(e)

@@ -9,8 +9,8 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 
 1. Install libraries on the server
 
-        $ sudo apt-get install -y zip nginx supervisor postgresql
-        $ sudo apt-get install -y python3-pip python3-dev python3-virtualenv libpq-dev \
+        $ sudo apt-get install -y git zip nmap nginx supervisor
+        $ sudo apt-get install -y python3-pip python3-dev python3-virtualenv \
             libjpeg-dev libjpeg8-dev python-smbus
 
 

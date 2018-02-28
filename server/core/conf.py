@@ -1,6 +1,7 @@
-settings = {
-    'db_path': '/home/pi/apollo/db.json',
-    'sensors_path': '/home/pi/apollo/sensors.json',
+settings_base = {
+    'network': '192.168.0.{}',
+    'db_path': '/home/manti/www/apollo/db.json',
+    'sensors_path': '/home/manti/www/apollo/sensors.json',
     'dt_format': '%Y-%m-%d %H:%M',
     'sensors': [{
         'mac': '00:00:00:00:00:00',
@@ -36,3 +37,10 @@ settings = {
         }
     },
 }
+
+try:
+    from .local import settings_local
+except ImportError:
+    settings_local = {}
+
+settings = {**settings_base, **settings_local}

@@ -7,5 +7,5 @@ __pycache__
 client/.buildoser/
 client/bin/
 
-server/app/sensors.json
+server/core/local.py
 

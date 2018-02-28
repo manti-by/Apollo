@@ -1,6 +1,6 @@
 from time import sleep
 
-from app.conf import settings
+from core.conf import settings
 from sensors.ili9341 import Display
 
 display = Display(settings['display_dc'], settings['display_rst'])

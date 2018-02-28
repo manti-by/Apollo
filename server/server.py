@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 
-from app.data import DB
+from core.data import DB
 
 app = Flask(__name__)
 

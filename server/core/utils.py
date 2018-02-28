@@ -3,7 +3,7 @@ import logging
 import logging.config
 import subprocess
 
-from app.conf import settings
+from core.conf import settings
 
 logger = logging.getLogger()
 
@@ -15,12 +15,12 @@ def get_logger():
 
 
 def node_is_live(ip):
-    return subprocess.call(["ping", "-c1", "-w2", ip]) == 0
+    return subprocess.call(['ping', '-c1', '-w2', ip]) == 0
 
 
 def get_mac_by_ip(ip):
-    pid = subprocess.Popen(["arp", "-n", ip])
-    output, errors = pid.communicate()[0]
+    pid = subprocess.Popen(['sudo', 'nmap', '-sn', ip])
+    output, errors = pid.communicate()
     if output is not None:
         return re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", re.S).groups()[0]
 

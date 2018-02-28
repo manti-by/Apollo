@@ -2,6 +2,7 @@ Flask>=0.12.0,<0.13.0
 tinydb>=3.7.0,<3.8.0
 
 requests>=2.18.0,<2.19.0
+numpy>=1.14.0,<1.15.0
 Pillow==3.3.0
 RPi.GPIO==0.5.11
 -e git://github.com/manti-by/Adafruit_Python_ILI9341.git#egg=Adafruit_ILI9341

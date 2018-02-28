@@ -1,9 +1,9 @@
 import json
 import requests
 
-from app.conf import settings
-from app.data import DB
-from app.utils import sensor_name_by_mac
+from core.conf import settings
+from core.data import DB
+from core.utils import sensor_name_by_mac
 from sensors.ili9341 import Display
 
 

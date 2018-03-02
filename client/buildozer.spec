@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = Apollo IoT Client
+title = Apollo
 
 # (str) Package name
 package.name = apollo
@@ -46,7 +46,7 @@ requirements = python3crystax,kivy
 #garden_requirements =
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/assets/presplash.png
 
 # (str) Icon of the application
 icon.filename = %(source.dir)s/assets/icon.png
@@ -97,7 +97,7 @@ fullscreen = 0
 #android.sdk = 20
 
 # (str) Android NDK version to use
-android.ndk = 10.3.2
+android.ndk = r10.3.2
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True

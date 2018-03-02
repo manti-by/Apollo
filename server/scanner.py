@@ -24,8 +24,8 @@ if need_rescan:
         current_ip = settings['network'].format(i)
         if node_is_live(current_ip):
             mac_address = get_mac_by_ip(current_ip)
-            if mac_address in settings['sensors']:
-                result[mac_address] = current_ip
+            # if mac_address in settings['sensors']:
+            result[mac_address] = current_ip
 
     # Save current sensors pool
     sensors_file = open(settings['sensors_path'], 'w')

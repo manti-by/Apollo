@@ -1,11 +1,12 @@
 import re
 import logging
 import logging.config
-import subprocess
+from subprocess import Popen, PIPE, call
 
 from core.conf import settings
 
 logger = logging.getLogger()
+mac_pattern = re.compile("(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", re.I)
 
 
 def get_logger():
@@ -15,14 +16,14 @@ def get_logger():
 
 
 def node_is_live(ip):
-    return subprocess.call(['ping', '-c1', '-w2', ip]) == 0
+    return call(['ping', '-c1', '-w2', ip]) == 0
 
 
 def get_mac_by_ip(ip):
-    pid = subprocess.Popen(['sudo', 'nmap', '-sn', ip])
+    pid = Popen(['sudo', 'nmap', '-sn', ip], stdin=PIPE, stdout=PIPE, stderr=PIPE)
     output, errors = pid.communicate()
     if output is not None:
-        return re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", re.S).groups()[0]
+        return mac_pattern.search(output.decode()).groups()[0]
 
 
 def sensor_name_by_mac(mac):

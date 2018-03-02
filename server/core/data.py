@@ -46,6 +46,14 @@ class Item:
 
 class DB:
 
+    _debug_data = {
+        'Guest Room': {'temp': 22.5, 'humidity': 62.2},
+        'Work Room': {'temp': 20.8, 'humidity': 55.7},
+        'Bedroom': {'temp': 21.1, 'humidity': 57.1},
+        'Bathroom': {'temp': 25.1, 'humidity': 94.9},
+        '2nd Floor': {'temp': 23.7, 'humidity': 69.3},
+    }
+
     def __init__(self):
         self.db = TinyDB(settings['db_path'])
 
@@ -53,10 +61,10 @@ class DB:
         item = Item(data)
         self.db.insert(item.__dict__)
 
-    def seed(self):
-        self.add({'id': '00:00:00:00:00:00', 'temp': 22.5, 'humidity': 75.1})
-
     def get(self):
+        if settings['debug']:
+            return self._debug_data
+
         result = {}
         for sensor in settings['sensors']:
             value = self.db.search(where('id') == sensor['mac'])[-1]

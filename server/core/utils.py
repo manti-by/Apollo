@@ -1,4 +1,5 @@
 import re
+import random
 import logging
 import logging.config
 from subprocess import Popen, PIPE, call
@@ -23,8 +24,21 @@ def get_mac_by_ip(ip):
     pid = Popen(['sudo', 'nmap', '-sn', ip], stdin=PIPE, stdout=PIPE, stderr=PIPE)
     output, errors = pid.communicate()
     if output is not None:
-        return mac_pattern.search(output.decode()).groups()[0]
+        match = mac_pattern.search(output.decode())
+        if match is not None:
+            return match.groups()[0]
+    return None
 
 
 def sensor_name_by_mac(mac):
-    return settings['sensors'][mac]['name']
+    return settings['sensors'][mac]
+
+
+def get_debug_response():
+    return {
+        'result': 200,
+        'data': {
+            'temp': random.uniform(18, 26),
+            'humidity': random.uniform(50, 90)
+        }
+    }

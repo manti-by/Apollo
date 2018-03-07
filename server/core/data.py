@@ -1,4 +1,5 @@
 from datetime import datetime
+from operator import itemgetter
 from tinydb import TinyDB, where
 
 from core.conf import settings
@@ -16,14 +17,14 @@ class Item:
             'datetime': datetime.utcnow().strftime(settings['dt_format'])
         }
         try:
-            if 'id' not in data:
-                raise Exception('Item id can not be Null')
+            if 'mac' not in data:
+                raise Exception('Item mac can not be Null')
             if 'temp' not in data:
                 raise Exception('Item temp can not be Null')
             if 'humidity' not in data:
                 raise Exception('Item humidity can not be Null')
 
-            self.data['id'] = data['id']
+            self.data['mac'] = data['mac']
             self.data['temp'] = float(data['temp'])
             self.data['humidity'] = float(data['humidity'])
         except Exception as e:
@@ -31,7 +32,6 @@ class Item:
             raise e
 
         try:
-
             if 'datetime' in data:
                 date_time = datetime.strptime(data['datetime'], settings['dt_format'])
                 if date_time:
@@ -46,14 +46,6 @@ class Item:
 
 class DB:
 
-    _debug_data = {
-        'Guest Room': {'temp': 22.5, 'humidity': 62.2},
-        'Work Room': {'temp': 20.8, 'humidity': 55.7},
-        'Bedroom': {'temp': 21.1, 'humidity': 57.1},
-        'Bathroom': {'temp': 25.1, 'humidity': 94.9},
-        '2nd Floor': {'temp': 23.7, 'humidity': 69.3},
-    }
-
     def __init__(self):
         self.db = TinyDB(settings['db_path'])
 
@@ -62,13 +54,13 @@ class DB:
         self.db.insert(item.__dict__)
 
     def get(self):
-        if settings['debug']:
-            return self._debug_data
-
         result = {}
-        for sensor in settings['sensors']:
-            value = self.db.search(where('id') == sensor['mac'])[-1]
-            result[sensor['name']] = {'temp': value['temp'],
-                                      'humidity': value['humidity'],
-                                      'datetime': value['datetime']}
+        for mac, name in settings['sensors'].items():
+            sensor_data = self.db.search(where('mac') == mac)
+            value = sorted(sensor_data, key=itemgetter('datetime'), reverse=True)[0]
+            result[name] = {
+                'temp': value['temp'],
+                'humidity': value['humidity'],
+                'datetime': value['datetime']
+            }
         return result

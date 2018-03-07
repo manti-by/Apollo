@@ -4,10 +4,9 @@ settings_base = {
     'db_path': '/home/manti/www/apollo/db.json',
     'sensors_path': '/home/manti/www/apollo/sensors.json',
     'dt_format': '%Y-%m-%d %H:%M',
-    'sensors': [{
-        'mac': '00:00:00:00:00:00',
-        'name': 'Guest Room'
-    }],
+    'sensors': {
+        '00:00:00:00:00:00': 'Guest Room'
+    },
     'display_dc': 24,
     'display_rst': 25,
     'thermometers': [

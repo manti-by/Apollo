@@ -1,7 +1,9 @@
 import json
 
 from core.conf import settings
-from core.utils import node_is_live, get_mac_by_ip
+from core.utils import node_is_live, get_mac_by_ip, get_logger
+
+logger = get_logger()
 
 
 # Load current sensors pool
@@ -20,12 +22,17 @@ for sensor in settings['sensors']:
 # Rescan network if needed
 if need_rescan:
     result = {}
-    for i in range(0, 255):
+    for i in range(0, 16):
         current_ip = settings['network'].format(i)
         if node_is_live(current_ip):
             mac_address = get_mac_by_ip(current_ip)
-            # if mac_address in settings['sensors']:
-            result[mac_address] = current_ip
+            if mac_address is None:
+                logger.warning('Cant get mac address for ip {}'.format(current_ip))
+                continue
+
+            # Update ip for sensor mac address
+            if mac_address in settings['sensors']:
+                result[mac_address] = current_ip
 
     # Save current sensors pool
     sensors_file = open(settings['sensors_path'], 'w')

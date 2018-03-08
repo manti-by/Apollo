@@ -25,7 +25,7 @@ def get_mac_by_ip(ip):
     output, errors = pid.communicate()
     if output is not None:
         match = mac_pattern.search(output.decode())
-        if match is not None:
+        if match is not None and match.groups():
             return match.groups()[0]
     return None
 

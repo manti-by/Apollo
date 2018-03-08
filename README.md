@@ -32,8 +32,8 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 
 4. Add worker crontab
 
-        $ echo "*/5 * * * *    /usr/bin/python /home/pi/apollo/server/worker" | sudo tee -a /var/spool/cron/crontabs/pi
-        $ echo "57 * * * *    /usr/bin/python /home/pi/apollo/server/scanner" | sudo tee -a /var/spool/cron/crontabs/pi
+        $ echo "*/5 * * * *    /usr/bin/python3 /home/pi/apollo/server/worker" | sudo tee -a /var/spool/cron/crontabs/pi
+        $ echo "57 * * * *    /usr/bin/python3 /home/pi/apollo/server/scanner" | sudo tee -a /var/spool/cron/crontabs/pi
 
 
 

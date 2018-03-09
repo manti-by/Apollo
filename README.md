@@ -11,13 +11,13 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 
         $ sudo apt-get install -y git zip nmap nginx supervisor
         $ sudo apt-get install -y python3-pip python3-dev python3-virtualenv \
-            libjpeg-dev libjpeg8-dev python-smbus
+             python3-smbus libopenjp2-7-dev libatlas-base-dev
 
 
 2. Clone sources, install app requirements and setup local config
 
-        $ git clone git@github.com:manti-by/Apollo.git /home/pi/apollo/
-        $ sudo pip install -r /home/pi/apollo/server/requirements.txt
+        $ git clone git@github.com:manti-by/Apollo.git /home/pi/apollo/src/
+        $ sudo pip install -r /home/pi/apollo/src/server/requirements.txt
 
 
 3. Update server configs and start it
@@ -32,8 +32,8 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 
 4. Add worker crontab
 
-        $ echo "*/5 * * * *    /usr/bin/python3 /home/pi/apollo/server/worker" | sudo tee -a /var/spool/cron/crontabs/pi
-        $ echo "57 * * * *    /usr/bin/python3 /home/pi/apollo/server/scanner" | sudo tee -a /var/spool/cron/crontabs/pi
+        $ echo "*/5 * * * *    /usr/bin/python3 /home/pi/apollo/src/server/worker.py" | sudo tee -a /var/spool/cron/crontabs/pi
+        $ echo "57 * * * *    /usr/bin/python3 /home/pi/apollo/src/server/scanner.py" | sudo tee -a /var/spool/cron/crontabs/pi
 
 
 

@@ -1,13 +1,12 @@
 settings_local = {
     'debug': True,
-    'network': '192.168.13.{}',
-    'db_path': '/home/manti/www/apollo/db.json',
-    'sensors_path': '/home/manti/www/apollo/sensors.json',
+    'network': '192.168.0.{}',
+    'db_path': '/home/pi/apollo/db.json',
+    'sensors_path': '/home/pi/apollo/sensors.json',
     'sensors': {
-        '30:85:A9:AC:4A:61': 'Test Room 01',
-        '38:D5:47:28:43:ED': 'Test Room 02',
-        '50:46:5D:72:60:36': 'Test Room 03',
-        '20:CF:30:0F:34:A2': 'Test Room 04',
-        '30:85:A9:AC:49:2C': 'Test Room 05'
+        '98:DE:D0:CD:6C:AA': 'Router',
+        'D2:4A:00:BA:06:0A': 'Repeater',
+        '38:D5:47:10:9F:55': 'Nostromo',
+        '68:3E:34:A8:BC:0D': 'Meizu PRO 6'
     },
 }

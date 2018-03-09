@@ -14,15 +14,15 @@ sensors_file.close()
 
 # Check existing sensors are live
 need_rescan = False
-for sensor in settings['sensors']:
-    if sensor['mac'] not in existing or not node_is_live(existing[sensor['mac']]):
+for mac, name in settings['sensors'].items():
+    if mac not in existing or not node_is_live(existing[mac]):
         need_rescan = True
 
 
 # Rescan network if needed
 if need_rescan:
     result = {}
-    for i in range(0, 16):
+    for i in range(0, 255):
         current_ip = settings['network'].format(i)
         if node_is_live(current_ip):
             mac_address = get_mac_by_ip(current_ip)
@@ -31,7 +31,7 @@ if need_rescan:
                 continue
 
             # Update ip for sensor mac address
-            if mac_address in settings['sensors']:
+            if mac_address in settings['sensors'] or settings['debug']:
                 result[mac_address] = current_ip
 
     # Save current sensors pool

@@ -57,10 +57,11 @@ class DB:
         result = {}
         for mac, name in settings['sensors'].items():
             sensor_data = self.db.search(where('mac') == mac)
-            value = sorted(sensor_data, key=itemgetter('datetime'), reverse=True)[0]
-            result[name] = {
-                'temp': value['temp'],
-                'humidity': value['humidity'],
-                'datetime': value['datetime']
-            }
+            if sensor_data:
+                value = sorted(sensor_data, key=itemgetter('datetime'), reverse=True)[0]
+                result[name] = {
+                    'temp': value['temp'],
+                    'humidity': value['humidity'],
+                    'datetime': value['datetime']
+                }
         return result

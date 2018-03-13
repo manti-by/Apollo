@@ -1,6 +1,7 @@
 import time
 import subprocess
 
+
 def read_channel(channel):
     if channel is None:
         return -1
@@ -12,7 +13,7 @@ def read_channel(channel):
         # Bitbang the 1-wire interface.
         command = 'sudo cat /sys/bus/w1/devices/28-{}/w1_slave'
         s = subprocess.check_output(command.format(channel), shell=True).strip()
-        lines = s.split('\n')
+        lines = s.split(b'\n')
         line0 = lines[0].split()
         if line0[-1] == 'YES':  # CRC check was good.
             crc_ok = True

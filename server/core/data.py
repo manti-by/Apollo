@@ -10,7 +10,7 @@ logger = get_logger()
 
 class Item:
 
-    fields = ('id', 'temp', 'humidity', 'datetime',)
+    fields = ('mac', 'temp', 'humidity', 'datetime',)
 
     def __init__(self, data):
         self.data = {
@@ -64,4 +64,17 @@ class DB:
                     'humidity': value['humidity'],
                     'datetime': value['datetime']
                 }
+        return result
+
+    def search(self, filters):
+        result = []
+        sensor_data = self.db.search(where('mac') == filters['mac'])
+        if sensor_data:
+            for item in sorted(sensor_data, key=itemgetter('datetime'), reverse=True):
+                if filters['start_date'] <= item['datetime'] <= filters['end_date']:
+                    result.append({
+                        'temp': item['temp'],
+                        'humidity': item['humidity'],
+                        'datetime': item['datetime']
+                    })
         return result

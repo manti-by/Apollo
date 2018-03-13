@@ -1,3 +1,5 @@
+import json
+import requests
 from urllib.parse import urlparse
 
 from kivy.app import App
@@ -21,13 +23,28 @@ class ApolloLayout:
         self.server_url = TextInput(text='http://192.168.0.112')
         self.layout = self.build()
 
+    def update_data(self):
+        r = requests.get(self.server_url.text, timeout=3)
+        response = json.loads(r.json())
+        if r.status_code != 200 or response['result'] != 200:
+            reason = r.reason if r.status_code != 200 else response['message']
+            raise 'Get data from server failed [{}]'.format(reason)
+        self.data = response['data']
+
     def refresh(self, button_instance):
-        view = ModalView()
         result = urlparse(self.server_url.text)
         if result.scheme and result.netloc:
-            text = self.server_url.text
+            try:
+                self.update_data()
+                self.build()
+                return
+            except requests.exceptions.ConnectionError:
+                text = 'Server not responding'
+            except Exception as e:
+                text = str(e)
         else:
             text = 'Url is not valid'
+        view = ModalView()
         view.add_widget(Label(text=text))
         view.open()
 

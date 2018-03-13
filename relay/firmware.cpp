@@ -55,7 +55,6 @@ void loop() {
                 // so you can send a reply
                 if (c == '\n' && currentLineIsBlank) {
                     // Check relay
-
                     if (status == 0) {
                         status = 1;
                         digitalWrite(RelayPin, HIGH);

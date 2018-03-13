@@ -37,8 +37,8 @@ NOTE: You can simply run setup_server.sh on your Raspberry PI
 
 
 
-Sensor Setup (Arduino Nano V3.0 ATmega328P)
--------------------------------------------
+Sensor Setup (ESP8266 + DNT22 + Arduino Nano V3.0)
+--------------------------------------------------
 
 1. Install Arduino system libraries 
 

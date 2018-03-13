@@ -1,7 +1,7 @@
 settings_base = {
     'debug': False,
     'network': '192.168.0.{}',
-    'db_path': '/home/manti/www/apollo/db.json',
+    'db_path': '/home/manti/www/apollo/database.json',
     'sensors_path': '/home/manti/www/apollo/sensors.json',
     'dt_format': '%Y-%m-%d %H:%M',
     'sensors': {

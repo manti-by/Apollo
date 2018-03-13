@@ -1,13 +1,17 @@
+# Server dependencies
 Flask>=0.12.0,<0.13.0
 tinydb>=3.7.0,<3.8.0
 uwsgi>=2.0.0,<2.1.0
 
+# Worker and scanner dependencies
 requests>=2.18.0,<2.19.0
 numpy>=1.14.0,<1.15.0
-Pillow==3.3.0
-RPi.GPIO==0.5.11
--e git://github.com/manti-by/Adafruit_Python_ILI9341.git#egg=Adafruit_ILI9341
 
-# Dev dependencies
+# Display dependencies
+Pillow>=5.0.0,<5.1.0
+RPi.GPIO>=0.6.3,<0.7.0
+Adafruit-ILI9341>=1.5.0,<1.6.0
+
+# Development dependencies
 flake8>=3.5.0
 ipython>=6.2.1

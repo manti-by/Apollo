@@ -2,7 +2,7 @@ import json
 import requests
 
 from core.conf import settings
-from core.data import DB
+from core.database import DB
 from core.utils import sensor_name_by_mac, get_logger, get_debug_response
 from sensors.ili9341 import Display
 

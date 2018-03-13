@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 
-from core.data import DB
+from core.database import DB
 from core.conf import settings
 
 app = Flask(__name__)

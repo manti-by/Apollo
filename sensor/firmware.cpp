@@ -42,7 +42,7 @@ void loop() {
         Serial.println("Client connected");
 
         boolean currentLineIsBlank = true;
-        char result[128] = "{\"result\": 500, \"message\": \"Failed to read from DHT sensor\"}",
+        char* result = "{\"result\": 500, \"type\": \"sensor\", \"message\": \"Failed to read from DHT sensor\"}",
              h_str[32], t_str[32];
         float h, t;
 
@@ -62,7 +62,7 @@ void loop() {
                     if (!isnan(h) && !isnan(t)) {
                         dtostrf(h, 8, 2, h_str);
                         dtostrf(t, 8, 2, t_str);
-                        sprintf(result, "{\"result\": 200, \"data\": {\"temperature\": %f, \"humidity\": %f}}",
+                        sprintf(result, "{\"result\": 200, \"type\": \"sensor\", \"data\": {\"temperature\": %f, \"humidity\": %f}}",
                                 h_str, t_str);
                     }
 

@@ -1,7 +1,6 @@
 Cython==0.25.2
+Pillow>=5.0.0
 buildozer==0.34
--e git+https://github.com/kivy/kivy.git#egg=Kivy
 
-# Dev dependencies
-flake8>=3.5.0
-ipython>=6.2.0
+-e git+https://github.com/kivy/kivy.git#egg=Kivy
+-e git+https://gitlab.com/kivymd/KivyMD.git#egg=KivyMD

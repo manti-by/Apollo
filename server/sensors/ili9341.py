@@ -34,8 +34,8 @@ class Display:
         for sensor, data in data.items():
             line_01 += '{0}: {1:.1g}/{2:.1g}  '.format(sensor, data['temp'], data['humidity'])
 
-        dt = datetime.utcnow().strftime(self.dt_format)
-        line_02 = ' Updated at {}'.format(dt)
+        updated_datetime = datetime.utcnow().strftime(self.dt_format)
+        line_02 = ' Updated at {}'.format(updated_datetime)
 
         draw.text((2,  2), line_01, font=font, fill=255)
         draw.text((2, 18), line_02, font=font, fill=255)

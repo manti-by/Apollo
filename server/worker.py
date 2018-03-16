@@ -40,5 +40,5 @@ for mac, ip in existing.items():
 
 
 # Show sensors data on display
-display = Display(settings['display_dc'], settings['display_rst'])
+display = Display(settings['display_dc'], settings['display_rst'], settings['dt_format'])
 display.draw(result)

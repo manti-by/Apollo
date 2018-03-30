@@ -10,7 +10,6 @@ from kivymd.theming import ThemeManager
 from kivymd.navigationdrawer import MDNavigationDrawer
 
 from kivymd.dialog import MDDialog
-from kivymd.label import MDLabel
 from kivymd.textfields import MDTextField
 
 from layout import main_widget
@@ -28,11 +27,24 @@ class ApolloApp(App):
     theme_cls = ThemeManager()
     nav_drawer = ObjectProperty()
 
-    def get_data(self, server_url):
-        result = urlparse(server_url)
+    def __init__(self, **kwargs):
+        super(ApolloApp, self).__init__(**kwargs)
+
+        self.address_dialog = MDDialog(title='Enter server address',
+                                       size_hint=(.8, None),
+                                       height=dp(250),
+                                       auto_dismiss=False)
+
+        self.address_input = MDTextField(hint_text='192.168.0.112')
+        self.address_dialog.add_widget(self.address_input)
+        self.address_dialog.add_action_button('Save',
+                                              action=lambda *x: self.address_dialog.dismiss())
+
+    def update_data_table(self):
+        result = urlparse(self.address_input.text)
         if result.scheme and result.netloc:
             try:
-                r = requests.get(self.server_url.text, timeout=3)
+                r = requests.get(self.address_input.text, timeout=3)
                 response = json.loads(r.json())
                 if r.status_code != 200 or response['result'] != 200:
                     reason = r.reason if r.status_code != 200 else response['message']
@@ -45,41 +57,7 @@ class ApolloApp(App):
         return None
 
     def show_server_address_dialog(self):
-        label = MDLabel(font_style='Body1',
-                        theme_text_color='Secondary',
-                        text='Server address',
-                        valign='top')
-
-        input = MDTextField(hint_text='No helper text')
-
-        dialog = MDDialog(title='Enter server address',
-                          size_hint=(.8, None),
-                          height=dp(250),
-                          auto_dismiss=False)
-
-        dialog.add_widget(label)
-        dialog.add_widget(input)
-
-        dialog.add_action_button('Dismiss',
-                                 action=lambda *x: dialog.dismiss())
-        dialog.open()
-
-    def show_about_dialog(self):
-        content = MDLabel(font_style='Body1',
-                          theme_text_color='Secondary',
-                          text="About this app text.",
-                          valign='top')
-
-        content.bind(size=content.setter('text_size'))
-        self.dialog = MDDialog(title="About this app",
-                               content=content,
-                               size_hint=(.8, None),
-                               height=dp(200),
-                               auto_dismiss=False)
-
-        self.dialog.add_action_button("Dismiss",
-                                      action=lambda *x: self.dialog.dismiss())
-        self.dialog.open()
+        self.address_dialog.open()
 
     def build(self):
         return Builder.load_string(main_widget)

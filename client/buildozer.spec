@@ -28,7 +28,7 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.1.1
+version = 0.1.2
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -97,7 +97,7 @@ fullscreen = 0
 #android.sdk = 20
 
 # (str) Android NDK version to use
-android.ndk = r10.3.2
+#android.ndk = r10.3.2
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True

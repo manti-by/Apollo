@@ -51,6 +51,13 @@ NavigationLayout:
                         TwoLineListItem:
                             text: "Slipping Room"
                             secondary_text: "22*C / 74%"
+                MDFloatingActionButton:
+                    id: refresh_button
+                    icon: 'refresh'
+                    elevation_normal: 8
+                    pos_hint: {'center_x': 0.9, 'center_y': 0.1}
+                    on_release: app.update_data_table()
+
             Screen:
                 name: 'about'
                 ScrollView:

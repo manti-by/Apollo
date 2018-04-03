@@ -1,5 +1,6 @@
 # Server dependencies
 Flask>=0.12.0,<0.13.0
+flask-cors>=3.0.0,<3.1.0
 tinydb>=3.7.0,<3.8.0
 uwsgi>=2.0.0,<2.1.0
 

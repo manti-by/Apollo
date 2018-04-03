@@ -32,9 +32,14 @@ a {
     color: #6495ED;
 }
 
+p {
+    line-height: 1.5;
+}
+
 .flex {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-flow: row wrap;
 }
 
@@ -47,10 +52,15 @@ a {
 
 header {
     background: #FFF;
-    border-bottom: 1px solid #CCC;
+}
+
+header .logo img,
+header .logo span {
+    display: block;
 }
 
 header .about {
+    padding: 0 1em;
     text-align: right;
 }
 
@@ -59,18 +69,17 @@ main {
 }
 
 #console {
-    height: 180px;
+    width: calc(100% - 4em);
+    height: 15em;
+    margin: 2em auto;
     padding: 0.5em;
     font-size: 0.8em;
-    border: 1px solid #CCC;
+    color: #666666;
+    border: 1px solid #CCCCCC;
     background: #ECECEC;
     overflow-y: auto;
 }
 
 .error {
     color: #F00;
-}
-
-.chart {
-    display: inline-block;
 }

@@ -3,15 +3,8 @@
     'use strict';
 
     $.app = {
-        data: [
-            ['Guest Room', [23, 24, 23, 22, 21]],
-            ['Bath Room', [26, 27, 28, 28, 28]],
-            ['Sleeping Room', [19, 19, 20, 21, 21]],
-            ['Working Room', [22, 22, 23, 22, 22]],
-            ['Reception', [17, 19, 21, 17, 18]]
-        ],
-
-        datasets: [],
+        raw_data: null,
+        crt_data: null,
 
         colors: [
             'rgba(255, 99, 132, 1)',
@@ -44,37 +37,68 @@
         update: function() {
             var view = this;
 
-            $.get('/', function(response) {
-                if (response['status'] === 200) {
-                    view.data = response['data'];
-                    view.info('Data updated');
+            $.ajax({
+                url: 'http://127.0.0.1:5000',
+                method: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                crossDomain: true,
+                success: function(response) {
+                    if (response['status'] === 200) {
+                        view.raw_data = response['data'];
+                        view.info('Data updated');
 
-                    view.compile();
-                    view.draw();
-                } else {
-                    view.error(response['message']);
+                        view.compile();
+                        view.draw();
+                    } else {
+                        view.error(response['message']);
+                    }
+                },
+                error: function () {
+                    view.error('Can\'t load data from server');
                 }
-            }).fail(function() {
-                view.error('Can\'t load data from server');
             });
         },
 
         compile: function() {
-            this.datasets = [];
+            if (!this.raw_data) return;
 
-            for (var i = 0; i < this.data.length; i++) {
-                this.datasets.push({
-                    label: this.data[i][0],
-                    data: this.data[i][1],
-                    borderColor: this.colors[i],
+            this.crt_data = {
+                labels: [],
+                datasets: []
+            };
+
+            var view = this,
+                color = 0,
+                datasets, labels, datetime;
+
+            $.each(this.raw_data, function (sensor, data) {
+                labels = [];
+                datasets = [];
+
+                for (var i = 0; i < data.length; i++) {
+                    datetime = new Date(Date.parse(data[i]['datetime']));
+                    labels.push(datetime.toLocaleTimeString());
+                    datasets.push(data[i]['temp']);
+                }
+
+                view.crt_data['labels'] = labels;
+                view.crt_data['datasets'].push({
+                    label: sensor,
+                    data: datasets,
+                    borderColor: view.colors[color],
                     borderWidth: 2,
                     fill: false
                 });
-            }
+
+                color++;
+            });
         },
 
         draw: function() {
             this.compile();
+
+            if (!this.crt_data) return;
 
             Chart.scaleService.updateScaleDefaults('linear', {
                 ticks: {
@@ -86,17 +110,13 @@
             var ctx = document.getElementById('sensors').getContext('2d'),
                 crt = new Chart(ctx, {
                     type: 'line',
-                    data: {
-                      labels: ["18:00", "18:05", "18:10", "18:15", "18:20"],
-                      datasets: this.datasets
-                    }
+                    data: this.crt_data
                 });
         }
     };
 
     $.app.info('Application started');
     $.app.update();
-    $.app.draw();
 
     setInterval(function() {
         $.app.update();

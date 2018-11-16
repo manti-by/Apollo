@@ -1,5 +1,5 @@
 // Including libraries
-#include <DHT.h>
+#include "lib/DHT/DHT.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 

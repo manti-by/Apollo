@@ -1,0 +1,145 @@
+/* Material icons */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../font/material-icons.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Open Sans Cyrillic */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans Regular'),
+        local('OpenSans-Regular'),
+        url(../font/open-sans-regular-cyrillic.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+    src: local('Open Sans Regular'),
+        local('OpenSans-Regular'),
+        url(../font/open-sans-medium-cyrillic.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+/* Open Sans Latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans Regular'),
+        local('OpenSans-Regular'),
+        url(../font/open-sans-regular-latin.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+        U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+        U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans SemiBold'),
+      local('OpenSans-SemiBold'),
+      url(../font/open-sans-medium-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Base styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #EEEEEE;
+}
+
+nav,
+#controls,
+.card {
+    margin-bottom: 20px;
+}
+
+#controls {
+    padding: 0 1em;
+}
+
+.card {
+    height: calc(100% - 20px);
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    background: #F7F7F7;
+}
+
+.card-header {
+    position: relative;
+    top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1rem;
+    text-align: right;
+    color: rgba(72, 72, 77, .1);
+    border-bottom: none;
+    background: #F7F7F7;
+}
+
+.card-header:first-child {
+    border-radius: 6px;
+}
+
+.plants-latest {
+    text-align: center;
+}
+
+.plants-latest canvas {
+    max-width: 80%;
+}
+
+.plants-latest label {
+    display: block;
+}
+
+.datetime .date,
+.datetime .time {
+    padding: 0;
+    font-size: 2rem;
+}
+
+.datetime .date {
+    font-weight: 600;
+}
+
+.weather .wind-direction {
+    position: relative;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: .25rem;
+    overflow: visible;
+}
+.weather .wind-direction i {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

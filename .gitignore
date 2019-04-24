@@ -1,11 +1,7 @@
+#.gitignore
+
+.idea/
+app/static/sdist/
+
 *.pyc
-*.pyo
 *~
-__pycache__
-.DS_Store
-
-client/.buildoser/
-client/bin/
-
-server/core/local.py
-

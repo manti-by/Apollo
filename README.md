@@ -1,53 +1,58 @@
 Apollo IoT App
-==============
+====
 
 
-Server setup (Raspberry Pi 3 Model B)
--------------------------------------
+About
+----
 
-NOTE: You can simply run setup_server.sh on your Raspberry PI
+Raspberry Pi app for monitoring
 
-1. Install libraries on the server
+Author: Alexander Chaika <manti.by@gmail.com>
 
-        $ sudo apt-get install -y git zip nmap nginx supervisor
-        $ sudo apt-get install -y python3-pip python3-dev python3-virtualenv \
-             python3-smbus libopenjp2-7-dev libatlas-base-dev
+Source link: https://bitbucket.org/manti_by/benjamin/
 
+Requirements:
 
-2. Clone sources, install app requirements and setup local config
-
-        $ git clone git@github.com:manti-by/Apollo.git /home/pi/apollo/src/
-        $ sudo pip install -r /home/pi/apollo/src/server/requirements.txt
+    Raspberry Pi, ESP8266, Soil Moisture + MCP3008 and DHT22 sensors
 
 
-3. Update server configs and start it
+Setup
+----
 
-        $ sudo ln -s home/pi/apollo/src/deploy/confs/nginx.conf /etc/nginx/sites-enabled/apollo.conf
-        $ sudo service nginx restart
+1. Install python pip
+    
+    $ sudo apt install python-pip sqlite3 supervisor
+    
+2. Install, create and activate virtualenv
 
-        $ sudo ln -s home/pi/apollo/src/deploy/confs/supervisor.conf /etc/supervisor/conf.d/apollo.conf
-        $ sudo supervisorctl update
-        $ sudo supervisorctl start apollo
+    $ sudo pip install virtualenv
+    
+    $ virtualenv -p python3 --no-site-packages --prompt=ben- venv
+    
+    $ source venv/bin/activate
+    
+3. Clone sources and install pip packages
+    
+    $ mkdir benjamin && cd benjamin/
+
+    $ git clone https://bitbucket.org/manti_by/benjamin.git src
+    
+    $ pip install -r src/app/requirements.txt
+    
+4. Run flask server under supervisor
+
+    $ sudo ln -s /home/pi/benjamin/src/svctl.conf /etc/supervisorctl/conf.d/benjamin.conf
+    
+    $ sudo supervisorctl update
+    
+5. Install crontab for worker
+
+    */5 * * * *    /home/pi/benjamin/venv/bin/python /home/pi/benjamin/src/app/worker.py
 
 
-4. Add worker crontab
+Notes
+----
 
-        $ echo "*/5 * * * *    /usr/bin/python3 /home/pi/apollo/src/server/worker.py" | sudo tee -a /var/spool/cron/crontabs/root
-        $ echo "57 * * * *    /usr/bin/python3 /home/pi/apollo/src/server/scanner.py" | sudo tee -a /var/spool/cron/crontabs/root
-
-
-
-Sensor Setup (ESP8266 + DNT22)
-------------------------------
-
-1. Install Arduino system libraries 
-
-        $ sudo apt-get install arduino arduino-core arduino-mk
-
-
-2. Clone sources, compile firmware and upload to Arduino 
-
-        $ git clone git@github.com:manti-by/Apollo.git
-        $ cd Apollo/client/
-        $ make
-        $ make upload
+Install locally DHT library on non Raspberry Pi device
+    
+    $ pip install --install-option="--force-pi" Adafruit_DHT

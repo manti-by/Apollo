@@ -43,7 +43,7 @@ local:
 venv:
 	deactivate | true
 	rm -rf ../venv/
-	virtualenv -p python3 --no-site-packages --prompt=ben- ../venv
+	virtualenv -p python3 --no-site-packages --prompt=apollo- ../venv
 	. ../venv/bin/activate
 
 check:

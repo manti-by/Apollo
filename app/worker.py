@@ -1,33 +1,21 @@
-import os
-
 import Adafruit_DHT
-import Adafruit_GPIO.SPI as SPI
-import Adafruit_MCP3008
 
+from conf import *
 from db import save_data
-
-SPI_PORT = 0
-SPI_DEVICE = 0
-
-MOISTURE_CHANNEL = 0
-LUMINOSITY_CHANNEL = 1
-DHT22_CHANNEL = 4
-
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "db.sqlite")
+from library import MCP3002
 
 
-def get_mcp3008_input_value(input_channel) -> int:
-    mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
-    adc = mcp.read_adc(input_channel)
-    return 100 - adc / 10.24
+mcp3002 = MCP3002(SPI_PORT, SPI_DEVICE)
 
 
 def get_moisture_level() -> int:
-    return get_mcp3008_input_value(MOISTURE_CHANNEL)
+    adc = mcp3002.read_adc(SMS_CHANNEL)
+    return int((1 - (adc - SMS_LOW) / (SMS_HIGH - SMS_LOW)) * 100)
 
 
 def get_luminosity_level() -> int:
-    return get_mcp3008_input_value(LUMINOSITY_CHANNEL)
+    adc = mcp3002.read_adc(LMS_CHANNEL)
+    return int((adc - LMS_LOW) / (LMS_HIGH - LMS_LOW) * 100)
 
 
 def get_temp_humidity() -> tuple:

@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Benjamin</title>
+    <title>Apollo</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <meta name="author" content="Alexander Chaika">
-    <meta name="description" content="Raspberry Pi app for monitoring Ficus Benjamina health.">
+    <meta name="description" content="Raspberry Pi IOT app.">
     <meta name="theme-color" content="#F7F7F7">
 
     <meta property="og:image" content="{{ url_for('static', filename='img/favicon.png') }}">
@@ -28,6 +28,7 @@
         <main class="row">
             <div id="datetime" class="datetime col-12 col-lg-6 d-table-cell"></div>
             <div id="weather" class="weather col-12 col-lg-6 d-table-cell"></div>
+            <div id="currency" class="currency col-12 col-lg-6 d-table-cell"></div>
 
             <div class="col-12">
                 <div class="card plants-latest">
@@ -174,6 +175,28 @@
             </div>
         </div>
     </script>
+
+    <script id="t-currency" type="text/x-handlebars-template">
+        <div class="card">
+            <div class="card-header">
+                Exchange Rates
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    <div class="row justify-content-end align-items-center">
+                        <div class="col-6 text-center usd">
+                            {{ usd_sell }} / {{ usd_buy }}
+                            <span class="sign">1 USD</span>
+                        </div>
+                        <div class="col-6 text-center rur">
+                            {{ rur_sell }} /  {{ rur_buy }}
+                            <span class="sign">1000 RUR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
     {% endraw %}
 
     <!--- JavaScript libraries --->
@@ -181,6 +204,7 @@
     <script src="{{ url_for('static', filename='js/lib/sensor.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/datetime.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/weather.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/widget/currency.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/plants-latest.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/plants-report.js') }}"></script>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>

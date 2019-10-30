@@ -75,8 +75,8 @@ class Sensor {
         this.ctx.fillStyle = color;
         this.ctx.shadowColor = 'rgb(0, 0, 0, .2)';
         this.ctx.shadowOffsetX = 0;
-        this.ctx.shadowOffsetY = 5;
-        this.ctx.shadowBlur = 10;
+        this.ctx.shadowOffsetY = 1;
+        this.ctx.shadowBlur = 2;
         this.ctx.beginPath();
         this.ctx.moveTo(cX, cY);
         this.ctx.arc(cX, cY, radius, 0, 360 * Math.PI / 180);

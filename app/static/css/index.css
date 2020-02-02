@@ -124,13 +124,23 @@ nav,
 
 .datetime .date,
 .datetime .time {
-    padding: 0;
-    font-size: 2rem;
+    font-size: 1.75rem;
     text-align: left;
 }
 
 .datetime .date {
     font-weight: 600;
+}
+
+.weather .icon {
+    position: relative;
+    left: .75rem;
+}
+
+.weather .temp,
+.weather .wind,
+.weather .pressure {
+    padding: 0 0 .25rem .75rem;
 }
 
 .weather .wind-direction {
@@ -147,7 +157,8 @@ nav,
     left: 0;
 }
 
-.currency .card-text {
+.currency .usd,
+.currency .rur {
     font-size: 1.75rem;
     text-align: left;
 }

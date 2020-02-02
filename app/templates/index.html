@@ -26,9 +26,9 @@
             </span>
         </nav>
         <main class="row">
-            <div id="datetime" class="datetime col-12 col-lg-6 d-table-cell"></div>
-            <div id="weather" class="weather col-12 col-lg-6 d-table-cell"></div>
-            <div id="currency" class="currency col-12 col-lg-6 d-table-cell"></div>
+            <div id="datetime" class="datetime col-12 col-md-6 col-lg-4 d-table-cell"></div>
+            <div id="currency" class="currency col-12 col-md-6 col-lg-4 d-table-cell"></div>
+	    <div id="weather" class="weather col-12 col-md-6 col-lg-4 d-table-cell"></div>
 
             <div class="col-12">
                 <div class="card plants-latest">
@@ -131,23 +131,21 @@
             <div class="card-body">
                 <div class="card-text">
                     <div class="row justify-content-end align-items-center">
-                        <div class="col-3 text-center">
+                        <div class="col-3">
                             <img src="{{ icon }}" alt="weather" class="icon">
                         </div>
                         <div class="col-9">
-                            <div class="row justify-content-start align-items-baseline">
-                                <div class="col-12 col-md-4">
-                                    Temp:<br> {{ temp }} &deg;C
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    Wind:<br> {{ wind }} m/s
-                                    <span class="wind-direction">
-                                        <i class="material-icons">trending_flat</i>
-                                    </span>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    Pressure:<br> {{ pressure }} mmHg
-                                </div>
+                            <div class="temp">
+                                Temp: {{ temp }} &deg;C
+                            </div>
+                            <div class="wind">
+                                Wind: {{ wind }} m/s
+                                <span class="wind-direction">
+                                    <i class="material-icons">trending_flat</i>
+                                </span>
+                            </div>
+                            <div class="pressure">
+                                Pressure: {{ pressure }} mmHg
                             </div>
                         </div>
                     </div>
@@ -164,10 +162,10 @@
             <div class="card-body">
                 <div class="card-text">
                     <div class="row justify-content-end align-items-center">
-                        <div class="col-6 text-center date">
+                        <div class="col-12 date">
                             {{ date }}
                         </div>
-                        <div class="col-6 text-center time">
+                        <div class="col-12 time">
                             {{ time }}
                         </div>
                     </div>
@@ -184,11 +182,11 @@
             <div class="card-body">
                 <div class="card-text">
                     <div class="row justify-content-end align-items-center">
-                        <div class="col-6 text-center usd">
+                        <div class="col-12 usd">
                             {{ usd_sell }} / {{ usd_buy }}
                             <span class="sign">1 USD</span>
                         </div>
-                        <div class="col-6 text-center rur">
+                        <div class="col-12 rur">
                             {{ rur_sell }} /  {{ rur_buy }}
                             <span class="sign">1000 RUR</span>
                         </div>

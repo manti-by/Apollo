@@ -13,7 +13,7 @@ LOCAL_TZ = timezone('Europe/Minsk')
 
 def get_data() -> tuple:
     _type = request.args.get("type", "absolute")
-    limit = request.args.get("limit", 5)
+    limit = request.args.get("limit", 10)
     group = request.args.get("group", "hourly")
 
     with sqlite3.connect(DB_PATH) as session:
@@ -50,6 +50,9 @@ def get_data() -> tuple:
                 label = label.strftime('%H:%M')
             else:
                 label = label.strftime('%Y-%m-%d')
+
+            if period is None:
+                continue
 
             if counter % period == 0:
                 result["temp"].append(round(sum_temp / period, 1))

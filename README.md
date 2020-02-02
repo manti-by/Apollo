@@ -8,7 +8,7 @@ Apollo IoT App
 About
 ----
 
-Raspberry Pi app for monitoring
+Raspberry Pi monitoring app
 
 Author: Alexander Chaika <manti.by@gmail.com>
 
@@ -17,15 +17,20 @@ Source link: https://github.com/manti-by/Apollo/
 Requirements:
 
 - Raspberry Pi
-- MCP3008 AD converter
+- MCP3002 AD converter (v1 - MCP3008)
 - Soil Moisture sensor
 - Light sensor
 - DHT22 sensor
-- ESP8266 (for satellites)
 
+First version
+----
 
-![Apollo](static/apollo.jpg)
+![Apollo](media/v1.jpg)
 
+Second version
+----
+
+![Apollo](media/v2.jpg)
 
 Setup
 ----

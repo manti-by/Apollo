@@ -2,7 +2,6 @@ import spidev
 
 
 class MCP3002:
-
     def __init__(self, spi_port=0, spi_device=0, max_speed_hz=1200000, v_ref=3.3):
         self.v_ref = v_ref
 

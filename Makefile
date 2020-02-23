@@ -40,6 +40,9 @@ export TEMPLATES_AUTO_RELOAD=1
 local:
 	cd app && flask run --host=0.0.0.0
 
+pip:
+	pip install -Ur deploy/requirements.txt
+
 venv:
 	deactivate | true
 	rm -rf ../venv/
@@ -47,6 +50,6 @@ venv:
 	. ../venv/bin/activate
 
 check:
-	black --py36 app/
+	black --line-length 119 --target-version py36 app/
 	isort app/*.py
 	flake8

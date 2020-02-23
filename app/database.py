@@ -1,14 +1,14 @@
 import os
 import sqlite3
-
 from datetime import datetime
+
 from flask import request
 from pytz import timezone, utc
 
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "db.sqlite")
 PERIODS = {"live": 1, "hourly": 12, "daily": 12 * 24, "weekly": 12 * 24 * 7}
 DT_FORMAT = "%Y-%m-%d %H:%M:%S"
-LOCAL_TZ = timezone('Europe/Minsk')
+LOCAL_TZ = timezone("Europe/Minsk")
 
 
 def get_data() -> tuple:
@@ -21,8 +21,8 @@ def get_data() -> tuple:
         cursor = session.cursor()
         query_limit = PERIODS.get(group, 1) * int(limit)
         cursor.execute(
-            "SELECT temp, humidity, moisture, luminosity, datetime "
-            "FROM data ORDER BY datetime DESC LIMIT ?", (query_limit,)
+            "SELECT temp, humidity, moisture, luminosity, datetime " "FROM data ORDER BY datetime DESC LIMIT ?",
+            (query_limit,),
         )
         session.commit()
         data = cursor.fetchall()[::-1]
@@ -47,9 +47,9 @@ def get_data() -> tuple:
             label = utc.localize(label, is_dst=None).astimezone(LOCAL_TZ)
 
             if group in ("live", "hourly"):
-                label = label.strftime('%H:%M')
+                label = label.strftime("%H:%M")
             else:
-                label = label.strftime('%Y-%m-%d')
+                label = label.strftime("%Y-%m-%d")
 
             if period is None:
                 continue
@@ -72,7 +72,5 @@ def get_data() -> tuple:
 def save_data(t: float, h: int, m: int, l: int):
     with sqlite3.connect(DB_PATH) as connection:
         cursor = connection.cursor()
-        cursor.execute(
-            "INSERT INTO data (temp, humidity, moisture, luminosity) VALUES (?, ?, ?, ?)", (t, h, m, l)
-        )
+        cursor.execute("INSERT INTO data (temp, humidity, moisture, luminosity) VALUES (?, ?, ?, ?)", (t, h, m, l))
         connection.commit()

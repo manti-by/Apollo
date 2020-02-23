@@ -1,4 +1,5 @@
 import time
+
 import spidev
 
 spi_ch = 0
@@ -8,7 +9,7 @@ spi = spidev.SpiDev(0, spi_ch)
 spi.max_speed_hz = 1200000
 
 
-def read_adc(adc_ch, vref = 3.3):
+def read_adc(adc_ch, vref=3.3):
 
     # Make sure ADC channel is 0 or 1
     if adc_ch != 0:
@@ -37,6 +38,7 @@ def read_adc(adc_ch, vref = 3.3):
     voltage = (vref * adc) / 1024
 
     return voltage
+
 
 while True:
     adc_0 = read_adc(0)

@@ -50,6 +50,6 @@ venv:
 	. ../venv/bin/activate
 
 check:
-	black --line-length 119 --target-version py36 app/
+	black --line-length 89 --target-version py36 app/
 	isort app/*.py
 	flake8

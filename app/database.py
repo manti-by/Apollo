@@ -21,13 +21,20 @@ def get_data() -> tuple:
         cursor = session.cursor()
         query_limit = PERIODS.get(group, 1) * int(limit)
         cursor.execute(
-            "SELECT temp, humidity, moisture, luminosity, datetime " "FROM data ORDER BY datetime DESC LIMIT ?",
+            "SELECT temp, humidity, moisture, luminosity, datetime "
+            "FROM data ORDER BY datetime DESC LIMIT ?",
             (query_limit,),
         )
         session.commit()
         data = cursor.fetchall()[::-1]
 
-        result = {"temp": [], "humidity": [], "moisture": [], "luminosity": [], "label": []}
+        result = {
+            "temp": [],
+            "humidity": [],
+            "moisture": [],
+            "luminosity": [],
+            "label": [],
+        }
 
         sum_temp = 0
         sum_humidity = 0
@@ -43,13 +50,14 @@ def get_data() -> tuple:
             sum_moisture += item["moisture"] or 0
             sum_luminosity += item["luminosity"] or 0
 
-            label = datetime.strptime(item["datetime"], DT_FORMAT)
-            label = utc.localize(label, is_dst=None).astimezone(LOCAL_TZ)
+            timestamp = utc.localize(
+                datetime.strptime(item["datetime"], DT_FORMAT), is_dst=None
+            ).astimezone(LOCAL_TZ)
 
             if group in ("live", "hourly"):
-                label = label.strftime("%H:%M")
+                label = timestamp.strftime("%H:%M")
             else:
-                label = label.strftime("%Y-%m-%d")
+                label = timestamp.strftime("%Y-%m-%d")
 
             if period is None:
                 continue
@@ -72,5 +80,9 @@ def get_data() -> tuple:
 def save_data(t: float, h: int, m: int, l: int):
     with sqlite3.connect(DB_PATH) as connection:
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO data (temp, humidity, moisture, luminosity) VALUES (?, ?, ?, ?)", (t, h, m, l))
+        cursor.execute(
+            "INSERT INTO data (temp, humidity, moisture, luminosity) "
+            "VALUES (?, ?, ?, ?)",
+            (t, h, m, l),
+        )
         connection.commit()

@@ -3,5 +3,7 @@
 .idea/
 app/static/sdist/
 
+.mypy_cache/
+
 *.pyc
 *~

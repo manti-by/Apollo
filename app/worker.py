@@ -1,9 +1,9 @@
 import Adafruit_DHT
 
-from conf import (DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW, SMS_CHANNEL,
-                  SMS_HIGH, SMS_LOW, SPI_DEVICE, SPI_PORT)
-from database import save_data
-from library import MCP3002
+from app.conf import (DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW,
+                      SMS_CHANNEL, SMS_HIGH, SMS_LOW, SPI_DEVICE, SPI_PORT)
+from app.database import save_data
+from app.library import MCP3002
 
 mcp3002 = MCP3002(SPI_PORT, SPI_DEVICE)
 

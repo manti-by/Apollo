@@ -29,6 +29,23 @@ export CURRENCY_MIGRATION_SCRIPT
 migrate_currency_data:
 	sqlite3 deploy/db.sqlite "$$CURRENCY_MIGRATION_SCRIPT"
 
+define WEATHER_MIGRATION_SCRIPT
+CREATE TABLE IF NOT EXISTS weather (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    temp DECIMAL(5,2),
+    pressure TINYINT,
+    icon VARCHAR(15),
+    wind_speed TINYINT,
+    wind_direction TINYINT,
+    datetime DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+endef
+
+export WEATHER_MIGRATION_SCRIPT
+migrate_weather_data:
+	sqlite3 deploy/db.sqlite "$$WEATHER_MIGRATION_SCRIPT"
+
+
 remigrate:
 	rm -f db.sqlite
 	make migrate

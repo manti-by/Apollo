@@ -5,6 +5,7 @@ from flask_static_compress import FlaskStaticCompress
 
 from apollo.database.sensors import get_sensors_data
 from apollo.database.currency import get_currency_data
+from apollo.database.weather import get_weather_data
 
 app = Flask(__name__)
 compress = FlaskStaticCompress(app)
@@ -29,9 +30,12 @@ def get_sensors_api():
 
 @app.route("/api/currency/", methods=["GET"])
 def get_currency_api():
-    limit = request.args.get("limit", 10)
-    group = request.args.get("group", "hourly")
-    return jsonify(get_currency_data(limit, group))
+    return jsonify(get_currency_data())
+
+
+@app.route("/api/weather/", methods=["GET"])
+def get_weather_api():
+    return jsonify(get_weather_data())
 
 
 if __name__ == "__main__":

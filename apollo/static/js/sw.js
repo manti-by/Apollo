@@ -2,8 +2,6 @@ const STATIC_CACHE = 'static-cache',
     DYNAMIC_CACHE = 'dynamic-cache',
     APP_RESOURCES = [
         '/static/manifest.json',
-
-        '/static/css/lib/bootstrap.min.css',
         '/static/css/index.css',
 
         '/static/font/material-icons.woff2',
@@ -15,8 +13,11 @@ const STATIC_CACHE = 'static-cache',
 
         '/static/js/lib/compiled.min.js',
         '/static/js/lib/sensor.js',
-        '/static/js/widget/plants-latest.js',
-        '/static/js/widget/plants-report.js',
+
+        '/static/js/widget/currency.js',
+        '/static/js/widget/datetime.js',
+        '/static/js/widget/indoor-climate.js',
+        '/static/js/widget/indoor-climate-report.js',
         '/static/js/widget/weather.js',
         '/static/js/index.js',
     ];

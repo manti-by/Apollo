@@ -6,7 +6,7 @@
     $.datetime.init();
     $.weather.init();
 
-    $.plants_latest.init();
-    $.plants_report.init();
+    $.indoor_climate.init();
+    $.indoor_climate_report.init();
 
 })(jQuery);

@@ -169,6 +169,6 @@
 
     }
 
-    $.plants_report = new PlantsReportWidget();
+    $.indoor_climate_report = new PlantsReportWidget();
 
 })(jQuery);

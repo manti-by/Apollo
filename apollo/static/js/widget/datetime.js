@@ -5,17 +5,14 @@
     class DatetimeWidget {
 
         constructor() {
-
             this.template = Handlebars.compile(
                 $('#t-datetime').html()
             );
-
             this.canvas = $('#datetime');
         }
 
         init() {
             this.update();
-
             setInterval(
                 () => this.update(), 1000
             );

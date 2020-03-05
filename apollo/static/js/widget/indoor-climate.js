@@ -80,6 +80,6 @@
 
     }
 
-    $.plants_latest = new PlantsLatestWidget();
+    $.indoor_climate = new PlantsLatestWidget();
 
 })(jQuery);

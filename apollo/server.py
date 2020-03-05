@@ -17,7 +17,10 @@ def index():
     group = request.args.get("group", "hourly")
     data = get_sensors_data(limit, group)
     return render_template(
-        "index.html", data=data, options={'limit': limit, 'group': group}, time=strftime("%H:%M", localtime())
+        "index.html",
+        data=data,
+        options={"limit": limit, "group": group},
+        time=strftime("%H:%M", localtime()),
     )
 
 

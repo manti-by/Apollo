@@ -1,9 +1,9 @@
 import sqlite3
-
 from datetime import datetime
+
 from pytz import utc
 
-from apollo.conf import DB_PATH, PERIODS, DT_FORMAT, LOCAL_TZ
+from apollo.conf import DB_PATH, DT_FORMAT, LOCAL_TZ, PERIODS
 
 
 def get_sensors_data(limit: int = None, group: str = None) -> dict:

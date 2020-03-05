@@ -1,4 +1,4 @@
-define MIGRATION_SCRIPT
+define SENSORS_MIGRATION_SCRIPT
 CREATE TABLE IF NOT EXISTS data (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     temp DECIMAL(5,2),
@@ -8,26 +8,26 @@ CREATE TABLE IF NOT EXISTS data (
 );
 endef
 
-export MIGRATION_SCRIPT
-migrate:
-	sqlite3 db.sqlite "$$MIGRATION_SCRIPT"
+export SENSORS_MIGRATION_SCRIPT
+migrate_sensors_data:
+	sqlite3 deploy/db.sqlite "$$SENSORS_MIGRATION_SCRIPT"
 
-define SEED_SCRIPT
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (22, 50, 75, '2018-01-01 02:00:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (25, 45, 72, '2018-01-01 02:15:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (23, 55, 68, '2018-01-01 02:30:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (20, 60, 64, '2018-01-01 02:45:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (18, 72, 60, '2018-01-01 03:00:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (17, 50, 60, '2018-01-01 03:15:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (22, 45, 58, '2018-01-01 03:30:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (25, 45, 59, '2018-01-01 03:45:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (26, 40, 59, '2018-01-01 04:00:00');
-INSERT INTO data (temp, humidity, moisture, datetime) VALUES (25, 42, 58, '2018-01-01 04:15:00');
+define CURRENCY_MIGRATION_SCRIPT
+CREATE TABLE IF NOT EXISTS currency (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usd_buy DECIMAL(5,2),
+    usd_sell DECIMAL(5,2),
+    eur_buy DECIMAL(5,2),
+    eur_sell DECIMAL(5,2),
+    rur_buy DECIMAL(5,2),
+    rur_sell DECIMAL(5,2),
+    datetime DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 endef
 
-export SEED_SCRIPT
-seed:
-	sqlite3 db.sqlite "$$SEED_SCRIPT"
+export CURRENCY_MIGRATION_SCRIPT
+migrate_currency_data:
+	sqlite3 deploy/db.sqlite "$$CURRENCY_MIGRATION_SCRIPT"
 
 remigrate:
 	rm -f db.sqlite
@@ -38,7 +38,7 @@ export FLASK_APP=server
 export FLASK_DEBUG=1
 export TEMPLATES_AUTO_RELOAD=1
 local:
-	cd app && flask run --host=0.0.0.0
+	cd apollo && flask run --host=0.0.0.0
 
 pip:
 	pip install -Ur deploy/requirements.txt
@@ -50,6 +50,6 @@ venv:
 	. ../venv/bin/activate
 
 check:
-	black --line-length 89 --target-version py36 app/
-	isort app/*.py
-	flake8
+	black --line-length 89 --target-version py36 apollo/
+	isort apollo/**/*.py
+	flake8 apollo/

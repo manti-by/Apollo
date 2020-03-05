@@ -1,9 +1,9 @@
 import Adafruit_DHT
 
-from app.conf import (DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW,
+from apollo.conf import (DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW,
                       SMS_CHANNEL, SMS_HIGH, SMS_LOW, SPI_DEVICE, SPI_PORT)
-from app.database import save_data
-from app.library import MCP3002
+from apollo.database.sensors import save_sensors_data
+from apollo.library import MCP3002
 
 mcp3002 = MCP3002(SPI_PORT, SPI_DEVICE)
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     moisture = get_moisture_level()
     luminosity = get_luminosity_level()
     humidity, temp = get_temp_humidity()
-    save_data(temp, humidity, moisture, luminosity)
+    save_sensors_data(temp, humidity, moisture, luminosity)
 
     print(
         "Temp: {:0.2f} *C, humidity: {:d}%, moisture: {:d}%, luminosity: {:d}%".format(

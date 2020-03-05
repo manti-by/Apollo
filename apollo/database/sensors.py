@@ -1,21 +1,14 @@
-import os
 import sqlite3
+
 from datetime import datetime
+from pytz import utc
 
-from flask import request
-from pytz import timezone, utc
-
-from app.conf import DB_PATH
-
-PERIODS = {"live": 1, "hourly": 12, "daily": 12 * 24, "weekly": 12 * 24 * 7}
-DT_FORMAT = "%Y-%m-%d %H:%M:%S"
-LOCAL_TZ = timezone("Europe/Minsk")
+from apollo.conf import DB_PATH, PERIODS, DT_FORMAT, LOCAL_TZ
 
 
-def get_data() -> tuple:
-    _type = request.args.get("type", "absolute")
-    limit = request.args.get("limit", 10)
-    group = request.args.get("group", "hourly")
+def get_sensors_data(limit: int = None, group: str = None) -> dict:
+    limit = limit if limit is not None else 10
+    group = group if group is not None else "hourly"
 
     with sqlite3.connect(DB_PATH) as session:
         session.row_factory = sqlite3.Row
@@ -75,10 +68,10 @@ def get_data() -> tuple:
                 sum_moisture = 0
                 sum_luminosity = 0
 
-        return result, {"type": _type, "limit": limit, "group": group}
+        return result
 
 
-def save_data(t: float, h: int, m: int, l: int):
+def save_sensors_data(t: float, h: int, m: int, l: int):
     with sqlite3.connect(DB_PATH) as connection:
         cursor = connection.cursor()
         cursor.execute(

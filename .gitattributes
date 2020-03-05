@@ -1,3 +1,3 @@
-app/static/js/lib/*.min.js linguist-vendored=true
-app/static/css/lib/*.min.css linguist-vendored=true
-db.sqlite linguist-vendored=true
+app/static/js/lib/chart.js linguist-vendored=true
+app/static/js/lib/handlebars.js linguist-vendored=true
+deploy/db.sqlite linguist-vendored=true

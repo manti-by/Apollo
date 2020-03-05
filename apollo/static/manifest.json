@@ -1,7 +1,7 @@
 {
   "name": "Raspberry Pi app for monitoring Ficus Benjamin health",
   "short_name": "Apollo",
-  "start_url": "http://127.0.0.1",
+  "start_url": "http://127.0.0.1:5000/",
   "display": "standalone",
   "background_color": "#EEEEEE",
   "theme_color": "#F7F7F7",

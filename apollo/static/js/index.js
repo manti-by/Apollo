@@ -1,12 +1,16 @@
-(($) => {
+document.addEventListener("DOMContentLoaded", () => {
+    let currency = new CurrencyWidget();
+    currency.init();
 
-    'use strict';
+    let datetime = new DatetimeWidget();
+    datetime.init();
 
-    $.currency.init();
-    $.datetime.init();
-    $.weather.init();
+    let weather = new WeatherWidget();
+    weather.init();
 
-    $.indoor_climate.init();
-    $.indoor_climate_report.init();
+    let indoor_climate = new IndoorClimateWidget();
+    indoor_climate.init();
 
-})(jQuery);
+    let indoor_climate_report = new IndoorClimateReportWidget();
+    indoor_climate_report.init();
+});

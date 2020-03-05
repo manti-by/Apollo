@@ -17,13 +17,13 @@
 </head>
 <body>
     <div class="container">
-        <nav class="navbar">
-            <span class="navbar-brand">Apollo</span>
-            <span id="status" class="my-2 text-secondary">
+        <nav>
+            <span id="logo">Apollo</span>
+            <span id="status">
                 Last update: {{ time }}
             </span>
         </nav>
-        <main class="row">
+        <main>
             <div id="indoor-climate"></div>
             <div id="indoor-climate-report"></div>
             <div id="datetime"></div>
@@ -41,19 +41,19 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="plants-latest-temp"></canvas>
+                        <canvas id="indoor-climate-temp-canvas"></canvas>
                         <label>Temperature</label>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="plants-latest-humidity"></canvas>
+                        <canvas id="indoor-climate-humidity-canvas"></canvas>
                         <label>Humidity</label>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="plants-latest-moisture"></canvas>
+                        <canvas id="indoor-climate-moisture-canvas"></canvas>
                         <label>Moisture</label>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="plants-latest-luminosity"></canvas>
+                        <canvas id="indoor-climate-luminosity-canvas"></canvas>
                         <label>Luminosity</label>
                     </div>
                 </div>
@@ -71,54 +71,23 @@
                     <div class="form-group col-12 col-md-6 col-lg-3">
                         <label for="limit">Limit:</label>
                         <select id="limit" name="limit" class="form-control limit">
-                            <option value="5"{{#if options.limit == 5 %} selected{{/if}}>5</option>
-                            <option value="10"{{#if options.limit == 10 %} selected{{/if}}>10</option>
-                            <option value="25"{{#if options.limit == 25 %} selected{{/if}}>25</option>
-                            <option value="100"{{#if options.limit == 100 %} selected{{/if}}>100</option>
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="25">25</option>
+                            <option value="100">100</option>
                         </select>
                     </div>
                     <div class="form-group col-12 col-md-6 col-lg-3">
                         <label for="group">Group:</label>
                         <select id="group" name="group" class="form-control group">
-                            <option value="live"{{#if options.group = 'live' %} selected{{/if}}>Live</option>
-                            <option value="hourly"{{#if options.group == 'hourly' %} selected{{/if}}>Hourly</option>
-                            <option value="daily"{{#if options.group == 'daily' %} selected{{/if}}>Daily</option>
-                            <option value="monthly"{{#if options.group == 'monthly' %} selected{{/if}}>Monthly</option>
+                            <option value="live">Live</option>
+                            <option value="hourly" selected>Hourly</option>
+                            <option value="daily">Daily</option>
+                            <option value="monthly">Monthly</option>
                         </select>
                     </div>
-                    <div class="form-group col-12 col-lg-6 d-none">
-                        <div>
-                            <label>Graph Type:</label>
-                        </div>
-                        <div class="row">
-                            <div class="input-group col-12 col-sm-6">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input id="type-absolute" type="radio" name="type"
-                                               class="type" value="absolute"
-                                               {{#if options.type == 'absolute' %}checked{{/if}}>
-                                    </div>
-                                </div>
-                                <label class="form-control" for="type-absolute">
-                                    Absolute
-                                </label>
-                            </div>
-                            <div class="input-group col-12 col-sm-6">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input id="type-relative" type="radio" name="type"
-                                               class="type" value="relative"
-                                               {{#if options.type == 'relative' }}checked{{/if}}>
-                                    </div>
-                                </div>
-                                <label class="form-control" for="type-relative">
-                                    Relative
-                                </label>
-                            </div>
-                        </div>
-                    </div>
                 </form>
-                <canvas id="plants-report"></canvas>
+                <canvas id="indoor-climate-report-canvas"></canvas>
             </div>
         </div>
     </script>
@@ -198,13 +167,17 @@
     {% endraw %}
 
     <!--- JavaScript libraries --->
-    <script src="{{ url_for('static', filename='js/lib/compiled.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/handlebars.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lib/sensor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/request.js') }}"></script>
+
     <script src="{{ url_for('static', filename='js/widget/datetime.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/weather.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/currency.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/indoor-climate.js') }}"></script>
     <script src="{{ url_for('static', filename='js/widget/indoor-climate-report.js') }}"></script>
+
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
     <!--- Service Worker initialization --->

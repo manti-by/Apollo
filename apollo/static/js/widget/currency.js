@@ -1,37 +1,36 @@
-(($) => {
+class CurrencyWidget {
 
-    'use strict';
+    constructor() {
+        this.data = {};
+        this.status = document.getElementById("status");
 
-    class CurrencyWidget {
-
-        constructor() {
-            this.template = Handlebars.compile(
-                $('#t-currency').html()
-            );
-            this.canvas = $('#currency');
-        }
-
-        init() {
-            this.update();
-            setInterval(
-                () => this.update(), 60 * 60 * 1000
-            );
-        }
-
-        update() {
-            $.getJSON('/api/currency/', (data) => {
-                this.canvas.html(
-                    this.template({
-                        usd_sell: data['usd_sell'],
-                        usd_buy: data['usd_buy'],
-                        rur_sell: data['rur_sell'],
-                        rur_buy: data['rur_buy']
-                    })
-                );
-            });
-        };
+        this.target = document.getElementById("currency");
+        this.markup = document.getElementById("t-currency").text;
+        this.template = Handlebars.compile(this.markup);
     }
 
-    $.currency = new CurrencyWidget();
+    init() {
+        this.update();
+        setInterval(
+            () => this.update(), 60 * 60 * 1000
+        );
+    }
 
-})(jQuery);
+    render () {
+        this.target.innerHTML = this.template(this.data);
+    }
+
+    update() {
+        getJSON('/api/currency/', (data) => {
+            let now = new Date();
+            this.status.classList.remove('error');
+            this.status.text = 'Last update: ' + now.toLocaleTimeString();
+
+            this.data = data;
+            this.render();
+        }, () => {
+            this.status.classList.add('error');
+            this.status.text = 'Connection error';
+        });
+    };
+}

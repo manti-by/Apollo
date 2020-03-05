@@ -1,35 +1,30 @@
-(($) => {
+class DatetimeWidget {
 
-    'use strict';
-
-    class DatetimeWidget {
-
-        constructor() {
-            this.template = Handlebars.compile(
-                $('#t-datetime').html()
-            );
-            this.canvas = $('#datetime');
-        }
-
-        init() {
-            this.update();
-            setInterval(
-                () => this.update(), 1000
-            );
-        }
-
-        update() {
-            let datetime = new Date();
-
-            this.canvas.html(
-                this.template({
-                    date: datetime.toLocaleDateString(),
-                    time: datetime.toLocaleTimeString()
-                })
-            );
-        };
+    constructor() {
+        this.data = {};
+        this.target = document.getElementById("datetime");
+        this.markup = document.getElementById("t-datetime").text;
+        this.template = Handlebars.compile(this.markup);
     }
 
-    $.datetime = new DatetimeWidget();
+    init() {
+        this.update();
+        setInterval(
+            () => this.update(), 1000
+        );
+    }
 
-})(jQuery);
+    render () {
+        this.target.innerHTML = this.template(this.data);
+    }
+
+    update() {
+        let datetime = new Date();
+
+        this.data = {
+            date: datetime.toLocaleDateString(),
+            time: datetime.toLocaleTimeString()
+        };
+        this.render();
+    };
+}

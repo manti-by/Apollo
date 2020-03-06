@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <title>Apollo</title>
 
     <meta charset="utf-8">
@@ -13,180 +13,187 @@
     <meta property="og:image" content="{{ url_for('static', filename='img/favicon.png') }}">
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"/>
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-</head>
-<body>
-    <div class="container">
-        <nav>
-            <span id="logo">Apollo</span>
-            <span id="status">
-                Last update: {{ time }}
-            </span>
-        </nav>
-        <main>
-            <div id="indoor-climate"></div>
-            <div id="indoor-climate-report"></div>
-            <div id="datetime"></div>
-            <div id="currency"></div>
-            <div id="weather"></div>
-        </main>
+
+    {% compress 'css' %}
+      <link href="{{ url_for('static', filename='css/fonts.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='css/media.css') }}" rel="stylesheet" type="text/css" />
+    {% endcompress %}
+  </head>
+  <body>
+  <div class="container">
+    <nav>
+      <span id="logo">Apollo</span>
+      <span id="status">
+        Not updated
+      </span>
+    </nav>
+    <main>
+      <div id="indoor-climate"></div>
+      <div id="indoor-climate-report"></div>
+      <div id="datetime"></div>
+      <div id="currency"></div>
+      <div id="weather"></div>
+    </main>
+  </div>
+
+  {% raw %}
+  <script id="t-indoor-climate" type="text/x-handlebars-template">
+    <div class="card">
+      <div class="card-header">
+        Indoor Climate
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3">
+            <canvas id="indoor-climate-temp-canvas"></canvas>
+            <label>Temperature</label>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <canvas id="indoor-climate-humidity-canvas"></canvas>
+            <label>Humidity</label>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <canvas id="indoor-climate-moisture-canvas"></canvas>
+            <label>Moisture</label>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <canvas id="indoor-climate-luminosity-canvas"></canvas>
+            <label>Luminosity</label>
+          </div>
+        </div>
+      </div>
     </div>
+  </script>
 
-    {% raw %}
-    <script id="t-indoor-climate" type="text/x-handlebars-template">
-        <div class="card">
-            <div class="card-header">
-                Indoor Climate
+  <script id="t-indoor-climate-report" type="text/x-handlebars-template">
+    <div class="card">
+      <div class="card-header">
+        Indoor Climate Report
+      </div>
+      <div class="card-body">
+        <form id="controls" action="/" method="get" class="row">
+          <div class="form-group col-12 col-md-6 col-lg-3">
+            <label for="limit">Limit:</label>
+            <select id="limit" name="limit" class="form-control limit">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="25">25</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div class="form-group col-12 col-md-6 col-lg-3">
+            <label for="group">Group:</label>
+            <select id="group" name="group" class="form-control group">
+              <option value="live">Live</option>
+              <option value="hourly" selected>Hourly</option>
+              <option value="daily">Daily</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+        </form>
+        <canvas id="indoor-climate-report-canvas"></canvas>
+      </div>
+    </div>
+  </script>
+
+  <script id="t-datetime" type="text/x-handlebars-template">
+    <div class="card">
+      <div class="card-header">
+        Date and Time
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          <div class="row justify-content-end align-items-center">
+            <div class="col-12 date">
+              {{ date }}
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="indoor-climate-temp-canvas"></canvas>
-                        <label>Temperature</label>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="indoor-climate-humidity-canvas"></canvas>
-                        <label>Humidity</label>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="indoor-climate-moisture-canvas"></canvas>
-                        <label>Moisture</label>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <canvas id="indoor-climate-luminosity-canvas"></canvas>
-                        <label>Luminosity</label>
-                    </div>
-                </div>
+            <div class="col-12 time">
+              {{ time }}
             </div>
+          </div>
         </div>
-    </script>
+      </div>
+    </div>
+  </script>
 
-    <script id="t-indoor-climate-report" type="text/x-handlebars-template">
-        <div class="card">
-            <div class="card-header">
-                Indoor Climate Report
+  <script id="t-currency" type="text/x-handlebars-template">
+    <div class="card">
+      <div class="card-header">
+        Exchange Rates
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          <div class="row justify-content-end align-items-center">
+            <div class="col-12 usd">
+              {{ usd_sell }} / {{ usd_buy }}
+              <span class="sign">1 USD</span>
             </div>
-            <div class="card-body">
-                <form id="controls" action="/" method="get" class="row">
-                    <div class="form-group col-12 col-md-6 col-lg-3">
-                        <label for="limit">Limit:</label>
-                        <select id="limit" name="limit" class="form-control limit">
-                            <option value="5">5</option>
-                            <option value="10" selected>10</option>
-                            <option value="25">25</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-12 col-md-6 col-lg-3">
-                        <label for="group">Group:</label>
-                        <select id="group" name="group" class="form-control group">
-                            <option value="live">Live</option>
-                            <option value="hourly" selected>Hourly</option>
-                            <option value="daily">Daily</option>
-                            <option value="monthly">Monthly</option>
-                        </select>
-                    </div>
-                </form>
-                <canvas id="indoor-climate-report-canvas"></canvas>
+            <div class="col-12 rur">
+              {{ rur_sell }} / {{ rur_buy }}
+              <span class="sign">1000 RUR</span>
             </div>
+          </div>
         </div>
-    </script>
+      </div>
+    </div>
+  </script>
 
-    <script id="t-datetime" type="text/x-handlebars-template">
-        <div class="card">
-            <div class="card-header">
-                Date and Time
+  <script id="t-weather" type="text/x-handlebars-template">
+    <div class="card">
+      <div class="card-header">
+        Weather
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          <div class="row justify-content-end align-items-center">
+            <div class="col-3">
+              <img src="{{ icon }}" alt="weather" class="icon">
             </div>
-            <div class="card-body">
-                <div class="card-text">
-                    <div class="row justify-content-end align-items-center">
-                        <div class="col-12 date">
-                            {{ date }}
-                        </div>
-                        <div class="col-12 time">
-                            {{ time }}
-                        </div>
-                    </div>
-                </div>
+            <div class="col-9">
+              <div class="temp">
+                Temp: {{ temp }} &deg;C
+              </div>
+              <div class="wind">
+                Wind: {{ wind }} m/s
+                <span class="wind-direction">
+                                      <i class="material-icons">trending_flat</i>
+                                  </span>
+              </div>
+              <div class="pressure">
+                Pressure: {{ pressure }} mmHg
+              </div>
             </div>
+          </div>
         </div>
-    </script>
+      </div>
+    </div>
+  </script>
+  {% endraw %}
 
-    <script id="t-currency" type="text/x-handlebars-template">
-        <div class="card">
-            <div class="card-header">
-                Exchange Rates
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    <div class="row justify-content-end align-items-center">
-                        <div class="col-12 usd">
-                            {{ usd_sell }} / {{ usd_buy }}
-                            <span class="sign">1 USD</span>
-                        </div>
-                        <div class="col-12 rur">
-                            {{ rur_sell }} /  {{ rur_buy }}
-                            <span class="sign">1000 RUR</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
+  <!--- JavaScript libraries --->
+  {% compress 'js' %}
+    <script src="{{ url_for('static', filename='js/lib/chart.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/lib/handlebars.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/lib/sensor.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/lib/request.js') }}" type="text/javascript"></script>
 
-    <script id="t-weather" type="text/x-handlebars-template">
-        <div class="card">
-            <div class="card-header">
-                Weather
-            </div>
-            <div class="card-body">
-                <div class="card-text">
-                    <div class="row justify-content-end align-items-center">
-                        <div class="col-3">
-                            <img src="{{ icon }}" alt="weather" class="icon">
-                        </div>
-                        <div class="col-9">
-                            <div class="temp">
-                                Temp: {{ temp }} &deg;C
-                            </div>
-                            <div class="wind">
-                                Wind: {{ wind }} m/s
-                                <span class="wind-direction">
-                                    <i class="material-icons">trending_flat</i>
-                                </span>
-                            </div>
-                            <div class="pressure">
-                                Pressure: {{ pressure }} mmHg
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
-    {% endraw %}
-
-    <!--- JavaScript libraries --->
-    <script src="{{ url_for('static', filename='js/lib/chart.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/lib/handlebars.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/lib/sensor.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/lib/request.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='js/widget/datetime.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/widget/weather.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/widget/currency.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/widget/indoor-climate.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/widget/indoor-climate-report.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/widget/datetime.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/widget/weather.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/widget/currency.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/widget/indoor-climate.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/widget/indoor-climate-report.js') }}" type="text/javascript"></script>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  {% endcompress %}
 
-    <!--- Service Worker initialization --->
-    <script type="text/javascript">
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('{{ url_for('static', filename='js/sw.js') }}', {scope: '/static/js/sw.js'})
-                .catch((err) => console.log(err));
-        }
-    </script>
-</body>
+  <!--- Service Worker initialization --->
+  <script type="text/javascript">
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('{{ url_for('static', filename='js/sw.js') }}', {scope: '/static/js/sw.js'})
+        .catch((err) => console.log(err));
+    }
+  </script>
+  </body>
 </html>

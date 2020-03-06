@@ -35,9 +35,10 @@ Second version
 Setup
 ----
 
-1. Install python pip
+1. Install python pip and lessc
 
         $ sudo apt install python-pip sqlite3 supervisor
+        $ sudo npm install -g less
 
 2. Install, create and activate virtualenv
 

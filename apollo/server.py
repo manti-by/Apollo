@@ -8,6 +8,7 @@ from apollo.database.currency import get_currency_data
 from apollo.database.weather import get_weather_data
 
 app = Flask(__name__)
+app.config['COMPRESSOR_ENABLED'] = False
 compress = FlaskStaticCompress(app)
 
 

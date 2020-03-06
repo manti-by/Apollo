@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Digital-Display';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Digital Display'),
+        local('Digital-Display'),
+        url(../font/Digital-Display.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Gilroy Medium'),
+        local('Gilroy-Medium'),
+        url(../font/Gilroy-Medium.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Gilroy Semibold'),
+        local('Gilroy-Semibold'),
+        url(../font/Gilroy-Semibold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Gilroy Bold'),
+      local('Gilroy-Bold'),
+      url(../font/Gilroy-Bold.woff2) format('woff2');;
+}

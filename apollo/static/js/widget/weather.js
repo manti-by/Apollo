@@ -30,7 +30,7 @@ class WeatherWidget {
                 temp: data['temp'],
                 wind: data['wind_speed'],
                 pressure: data['pressure'],
-                icon: 'http://openweathermap.org/img/w/' + data['icon'] + '.png'
+                icon: '/static/img/icons/' + data['icon'] + '.png'
             };
             this.render();
         }, () => {

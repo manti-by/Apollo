@@ -30,21 +30,25 @@ class IndoorClimateWidget {
         this.temp_chart = new Sensor(this.temp, {
             color: 'rgba(119, 201, 197, 1)',
             fgcolor: 'rgba(119, 201, 197, .2)',
+            font: '20px Gilroy',
             unit: '°C'
         });
         this.humidity_chart = new Sensor(this.humidity, {
             color: 'rgba(63, 112, 181, 1)',
             fgcolor: 'rgba(63, 112, 181, .2)',
+            font: '20px Gilroy',
             unit: '%'
         });
         this.moisture_chart = new Sensor(this.moisture, {
             color: 'rgba(120, 54, 152, 1)',
             fgcolor: 'rgba(120, 54, 152, .2)',
+            font: '20px Gilroy',
             unit: '%'
         });
         this.luminosity_chart = new Sensor(this.luminosity, {
             color: 'rgba(152, 205, 239, 1)',
             fgcolor: 'rgba(152, 205, 239, .2)',
+            font: '20px Gilroy',
             unit: '%'
         });
     }

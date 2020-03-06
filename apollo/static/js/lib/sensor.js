@@ -22,7 +22,7 @@ class Sensor {
             options['line_width'] : 4;
 
         this.font = 'font' in options ?
-            options['font'] : '20px Open Sans';
+            options['font'] : '20px Arial';
 
         this.font_color = 'font_color' in options ?
             options['font_color'] : 'rgba(0, 0, 0, .9)';

@@ -10,7 +10,7 @@ class DatetimeWidget {
     init() {
         this.update();
         setInterval(
-            () => this.update(), 1000
+            () => this.update(), 60 * 1000
         );
     }
 

@@ -1,0 +1,14 @@
+#currency .block {
+    padding: 1rem 2rem;
+}
+
+#currency .line {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+#currency .value {
+    font-weight: 500;
+    color: #31456A;
+}

@@ -27,7 +27,7 @@ class WeatherWidget {
             this.status.text = 'Last update: ' + now.toLocaleTimeString();
 
             this.data = {
-                temp: data['temp'],
+                temp: data['temp'] > 0 ? '+' + data['temp'] : data['temp'] < 0 ? '-' + data['temp'] : 0,
                 wind: data['wind_speed'],
                 pressure: data['pressure'],
                 icon: '/static/img/icons/' + data['icon'] + '.png'

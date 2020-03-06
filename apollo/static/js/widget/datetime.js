@@ -22,8 +22,8 @@ class DatetimeWidget {
         let datetime = new Date();
 
         this.data = {
-            date: datetime.toLocaleDateString(),
-            time: datetime.toLocaleTimeString()
+            date: datetime.getDate() + '-' + datetime.getMonth() + 1  + '-' + datetime.getFullYear(),
+            time: datetime.getHours() + '<span class="separator">:</span>' + datetime.getMinutes(),
         };
         this.render();
     };

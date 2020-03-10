@@ -1,0 +1,15 @@
+#indoor-climate .gauge {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: url(../../svg/gauge.svg) no-repeat center center;
+}
+
+#indoor-climate .gauge .arrow {
+    position: absolute;
+    left: 117px;
+    top: 73px;
+    width: 90px;
+    height: 119px;
+    background: url(../../svg/gauge-arrow.svg) no-repeat center center;
+}

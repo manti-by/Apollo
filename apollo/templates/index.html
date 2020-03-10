@@ -21,6 +21,7 @@
       <link href="{{ url_for('static', filename='css/widget/currency.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='css/widget/datetime.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='css/widget/weather.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ url_for('static', filename='css/widget/indoor-climate.css') }}" rel="stylesheet" type="text/css" />
 
       <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css" />
       <link href="{{ url_for('static', filename='css/media.css') }}" rel="stylesheet" type="text/css" />
@@ -57,29 +58,22 @@
 
   {% raw %}
   <script id="t-indoor-climate" type="text/x-handlebars-template">
-    <div class="card">
-      <div class="card-header">
-        Indoor Climate
+    <h2>Indoor Climate</h2>
+    <div class="gauge">
+      <div class="arrow"></div>
+    </div>
+    <div class="block flex">
+      <div class="chart">
+        <h3>Humidity</h3>
+        <canvas id="indoor-climate-humidity-canvas"></canvas>
       </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-12 col-md-6 col-lg-3">
-            <canvas id="indoor-climate-temp-canvas"></canvas>
-            <label>Temperature</label>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3">
-            <canvas id="indoor-climate-humidity-canvas"></canvas>
-            <label>Humidity</label>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3">
-            <canvas id="indoor-climate-moisture-canvas"></canvas>
-            <label>Moisture</label>
-          </div>
-          <div class="col-12 col-md-6 col-lg-3">
-            <canvas id="indoor-climate-luminosity-canvas"></canvas>
-            <label>Luminosity</label>
-          </div>
-        </div>
+      <div class="chart">
+        <h3>Moisture</h3>
+        <canvas id="indoor-climate-moisture-canvas"></canvas>
+      </div>
+      <div class="chart">
+        <h3>Luminosity</h3>
+        <canvas id="indoor-climate-luminosity-canvas"></canvas>
       </div>
     </div>
   </script>
@@ -178,10 +172,12 @@
 
   <!--- JavaScript libraries --->
   {% compress 'js' %}
-    <script src="{{ url_for('static', filename='js/lib/chart.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/lib/chart-js.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/lib/handlebars.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='js/lib/sensor.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='js/lib/request.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/lib/requests.js') }}" type="text/javascript"></script>
+
+    <script src="{{ url_for('static', filename='js/lib/apollo/chart.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/lib/apollo/gauge.js') }}" type="text/javascript"></script>
 
     <script src="{{ url_for('static', filename='js/widget/datetime.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/widget/weather.js') }}" type="text/javascript"></script>

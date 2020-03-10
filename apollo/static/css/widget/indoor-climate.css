@@ -7,9 +7,28 @@
 
 #indoor-climate .gauge .arrow {
     position: absolute;
-    left: 117px;
-    top: 73px;
+    left: 50%;
+    top: 50%;
+    margin-left: -45px;
+    margin-top: -77px;
     width: 90px;
     height: 119px;
     background: url(../../svg/gauge-arrow.svg) no-repeat center center;
+}
+
+#indoor-climate .chart {
+    width: 33%;
+    text-align: center;
+}
+
+#indoor-climate .chart .wrap {
+    margin: .5rem auto;
+    width: 72px;
+    height: 72px;
+    background: url(../../img/chart.png) no-repeat center center;
+}
+
+#indoor-climate .chart h3 {
+    font-size: 12px;
+    font-weight: 500;
 }

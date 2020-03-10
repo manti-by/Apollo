@@ -2,8 +2,13 @@ class IndoorClimateWidget {
 
   constructor() {
     this.data = {};
-    this.status = document.getElementById("status");
+    this.colors = {
+      humidity: 'rgba(252, 166, 57, 1)',
+      moisture: 'rgba(69, 137, 105, 1)',
+      luminosity: 'rgba(40, 63, 158, 1)',
+    };
 
+    this.status = document.getElementById("status");
     this.target = document.getElementById("indoor-climate");
     this.markup = document.getElementById("t-indoor-climate").text;
     this.template = Handlebars.compile(this.markup);
@@ -22,40 +27,40 @@ class IndoorClimateWidget {
   render() {
     this.target.innerHTML = this.template(this.data);
 
-    this.humidity = document.getElementById("indoor-climate-humidity-canvas");
-    this.moisture = document.getElementById("indoor-climate-moisture-canvas");
-    this.luminosity = document.getElementById("indoor-climate-luminosity-canvas");
-
-    this.humidity_chart = new ApolloChart(this.humidity, {
-      color: 'rgba(63, 112, 181, 1)',
-      fgcolor: 'rgba(63, 112, 181, .2)',
-      font: '20px Gilroy',
-      unit: '%',
-    });
-    this.moisture_chart = new ApolloChart(this.moisture, {
-      color: 'rgba(120, 54, 152, 1)',
-      fgcolor: 'rgba(120, 54, 152, .2)',
-      font: '20px Gilroy',
-      unit: '%',
-    });
-    this.luminosity_chart = new ApolloChart(this.luminosity, {
-      color: 'rgba(152, 205, 239, 1)',
-      fgcolor: 'rgba(152, 205, 239, .2)',
-      font: '20px Gilroy',
-      unit: '%',
-    });
+    this.temp = document.querySelector("#indoor-climate .temp .arrow");
+    this.humidity = document.querySelector("#indoor-climate .humidity canvas");
+    this.moisture = document.querySelector("#indoor-climate .moisture canvas");
+    this.luminosity = document.querySelector("#indoor-climate .luminosity canvas");
   }
 
-  renderCharts(data) {
-    let arrow = document.querySelector("#indoor-climate .gauge .arrow"),
-      offset = 220 * Math.PI / 180,
-      radians = data['temp'][0] / 100 * 260 * Math.PI / 180 - offset;
+  renderGauge() {
+    let offset = 220 * Math.PI / 180,
+      radians = this.data['temp'] / 100 * 260 * Math.PI / 180 - offset;
 
-    arrow.setAttribute("style", "transform:rotate(" + radians + "deg)");
+    this.temp.setAttribute("style", "transform:rotate(" + radians + "deg)");
+  }
 
-    this.humidity_chart.draw(data['humidity'][0]);
-    this.moisture_chart.draw(data['moisture'][0]);
-    this.luminosity_chart.draw(data['luminosity'][0]);
+  renderCharts() {
+    this.drawChart(this.humidity, 'humidity');
+    this.drawChart(this.moisture, 'moisture');
+    this.drawChart(this.luminosity, 'luminosity');
+  }
+
+  drawChart(canvas, sensor) {
+    let ctx = canvas.getContext('2d'),
+      cX = Math.floor(canvas.width / 2),
+      cY = Math.floor(canvas.height / 2),
+      radius = Math.min(cX, cY) - 3,
+      offset = -30,
+      radians = this.data[sensor] / 100 * 260 * Math.PI / 180 - offset;
+
+    ctx.strokeStyle = this.colors[sensor];
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.moveTo(cX, cY);
+    ctx.beginPath();
+    ctx.arc(cX, cY, radius, -offset, radians);
+    ctx.stroke();
   }
 
   update() {
@@ -64,7 +69,14 @@ class IndoorClimateWidget {
       this.status.classList.remove('error');
       this.status.text = 'Last update: ' + now.toLocaleTimeString();
 
-      this.renderCharts(data);
+      this.data = {
+        temp: data['temp'][0],
+        humidity: data['humidity'][0],
+        moisture: data['moisture'][0],
+        luminosity: data['luminosity'][0],
+      };
+      this.renderGauge();
+      this.renderCharts();
     }, () => {
       this.status.classList.add('error');
       this.status.text = 'Connection error';

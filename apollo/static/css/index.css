@@ -11,15 +11,18 @@ body {
     background: linear-gradient(180deg, #EBF3FA 0%, #E3EDF7 51.56%, #E6F0F9 100%);
 }
 
+h1, h2, h3 {
+    text-align: center;
+}
+
 .container {
-    max-width: 324px;
+    max-width: 300px;
     margin: 0 auto;
     padding: 0;
 }
 
 .block {
     margin: 1rem .5rem;
-    padding: .5rem;
     background: #E3EDF7;
     box-shadow: 4px 3px 16px rgba(136, 165, 191, 0.54), -4px -2px 16px #FFFFFF;
     border-radius: 24px;

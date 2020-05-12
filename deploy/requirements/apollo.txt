@@ -2,10 +2,11 @@ requests>=2.23.0,<2.24.0
 Adafruit-DHT>=1.4.0,<1.5.0
 picamera>=1.13,<1.14
 
-Flask>=1.0.2,<1.1.0
+Flask>=1.1.2,<1.2.0
 flask-static-compress>=1.0.2,<1.1.0
 pytz==2018.9
 
 flake8>=3.7.9
 black>=19.10b0
-ipython>=7.12.0
+isort>=4.3.21
+ipython>=7.14.0

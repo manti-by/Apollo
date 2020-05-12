@@ -1,0 +1,6 @@
+--package=by.manti.helios
+--name=Helios
+--version=1.0
+--bootstrap=webview
+--requirements=python3,flask
+--port=5000

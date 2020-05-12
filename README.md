@@ -25,19 +25,19 @@ Requirements:
 First version
 ----
 
-![Apollo](media/v1.jpg)
+![Apollo](deploy/media/v1.jpg)
 
 Second version
 ----
 
-![Apollo](media/v2.jpg)
+![Apollo](deploy/media/v2.jpg)
 
-Setup
+Setup Apollo application
 ----
 
 1. Install python pip and lessc
 
-        $ sudo apt install python-pip sqlite3 supervisor
+        $ sudo apt install -y python-pip sqlite3 supervisor
         $ sudo npm install -g less
 
 2. Install, create and activate virtualenv
@@ -62,6 +62,15 @@ Setup
         */5 * * * *       /home/pi/apollo/venv/bin/python /home/pi/apollo/src/app/worker.py
         2-59/5 * * * *    raspistill -o /home/pi/images/$(date +\%Y-\%m-\%d_\%H-\%M-\%S).jpg
         0 * * * *         find /home/pi/images -name '*.jpg' -type f -mmin +480 -delete
+
+
+Setup Helios application
+----
+
+1. Install python and necessary libraries
+
+        $ sudo apt install -y build-essential ccache git zlib1g-dev python3.8 python3.8-dev \
+            libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-8-jdk unzip ant ccache autoconf libtool libffi-dev
 
 
 Notes

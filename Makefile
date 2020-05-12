@@ -54,19 +54,35 @@ remigrate:
 export FLASK_APP=server
 export FLASK_DEBUG=1
 export TEMPLATES_AUTO_RELOAD=1
-local:
+apollo:
 	cd apollo && flask run --host=0.0.0.0
 
-pip:
-	pip install -Ur deploy/requirements.txt
+apollo-pip:
+	pip install -Ur deploy/requirements/apollo.dev.txt
 
-venv:
-	deactivate | true
-	rm -rf ../venv/
-	virtualenv -p python3 --no-site-packages --prompt=apollo- ../venv
-	. ../venv/bin/activate
+apollo-venv:
+	rm -rf ../venv/apollo/
+	virtualenv -p python3.8 --no-site-packages --prompt=apollo- ../venv/apollo
 
-check:
-	black --line-length 89 --target-version py36 apollo/
+apollo-check:
+	black --line-length 89 --target-version py38 apollo/
 	isort apollo/**/*.py
 	flake8 apollo/
+
+helios-build:
+	p4a apk --private=$$(pwd)/helios --sdk-dir=$$HOME/android/home/ --ndk-dir=$$HOME/android/ndk/android-ndk-r21b-linux-x86_64/android-ndk-r21b --android-api=26 --ndk-api=21
+
+helios-clean:
+	p4a clean builds
+
+helios-pip:
+	pip install -Ur deploy/requirements/helios.dev.txt
+
+helios-venv:
+	rm -rf ../venv/helios/
+	virtualenv -p python3.8 --no-site-packages --prompt=helios- ../venv/helios
+
+helios-check:
+	black --line-length 89 --target-version py38 helios/
+	isort helios/**/*.py
+	flake8 helios/

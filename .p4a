@@ -4,3 +4,7 @@
 --bootstrap=webview
 --requirements=python3,flask
 --port=5000
+--wakelock
+
+--android-api=26
+--ndk-api=21

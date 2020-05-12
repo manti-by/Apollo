@@ -1,3 +1,5 @@
+.PHONY: apollo helios
+
 define SENSORS_MIGRATION_SCRIPT
 CREATE TABLE IF NOT EXISTS data (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,11 +53,10 @@ remigrate:
 	make migrate
 	make seed
 
-export FLASK_APP=server
 export FLASK_DEBUG=1
 export TEMPLATES_AUTO_RELOAD=1
 apollo:
-	cd apollo && flask run --host=0.0.0.0
+	cd apollo/ && flask run --host=0.0.0.0
 
 apollo-pip:
 	pip install -Ur deploy/requirements/apollo.dev.txt
@@ -69,8 +70,13 @@ apollo-check:
 	isort apollo/**/*.py
 	flake8 apollo/
 
+export FLASK_DEBUG=1
+export TEMPLATES_AUTO_RELOAD=1
+helios:
+	cd helios/ && flask run --host=0.0.0.0
+
 helios-build:
-	p4a apk --private=$$(pwd)/helios --sdk-dir=$$HOME/android/home/ --ndk-dir=$$HOME/android/ndk/android-ndk-r21b-linux-x86_64/android-ndk-r21b --android-api=26 --ndk-api=21
+	p4a apk --private=$$(pwd)/helios --sdk-dir=$$HOME/android/home/ --ndk-dir=$$HOME/android/ndk/android-ndk-r21b-linux-x86_64/android-ndk-r21b
 
 helios-clean:
 	p4a clean builds

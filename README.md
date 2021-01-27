@@ -25,12 +25,12 @@ Requirements:
 First version
 ----
 
-![Apollo](deploy/media/v1.jpg)
+![Apollo](media/v1.jpg)
 
 Second version
 ----
 
-![Apollo](deploy/media/v2.jpg)
+![Apollo](media/v2.jpg)
 
 Setup Apollo application
 ----

@@ -1,11 +1,8 @@
-import os
-
 from pytz import timezone
 
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "deploy", "db.sqlite")
+DB_PATH = "/home/pi/apollo/data/db.sqlite"
 
-PERIODS = {"live": 1, "hourly": 12, "daily": 12 * 24, "weekly": 12 * 24 * 7}
 DT_FORMAT = "%Y-%m-%d %H:%M:%S"
 LOCAL_TZ = timezone("Europe/Minsk")
 
@@ -40,8 +37,7 @@ LOGGING = {
         "filesystem": {
             "level": "WARNING",
             "class": "logging.FileHandler",
-            # "filename": "/home/pi/apollo/log/apollo.log",
-            "filename": "/home/manti/www/manti/apollo/apollo.log",
+            "filename": "/home/pi/apollo/log/apollo.log",
             "formatter": "standard",
         },
     },

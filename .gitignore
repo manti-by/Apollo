@@ -1,9 +1,6 @@
 #.gitignore
 
 .idea/
-apollo/static/sdist/
-
-.mypy_cache/
 
 *.pyc
 *~

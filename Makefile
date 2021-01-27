@@ -1,4 +1,4 @@
-.PHONY: apollo helios
+.PHONY: apollo
 
 define SENSORS_MIGRATION_SCRIPT
 CREATE TABLE IF NOT EXISTS data (
@@ -14,18 +14,6 @@ export SENSORS_MIGRATION_SCRIPT
 migrate_sensors_data:
 	sqlite3 deploy/db.sqlite "$$SENSORS_MIGRATION_SCRIPT"
 
-define CURRENCY_MIGRATION_SCRIPT
-CREATE TABLE IF NOT EXISTS currency (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    usd_buy DECIMAL(5,2),
-    usd_sell DECIMAL(5,2),
-    eur_buy DECIMAL(5,2),
-    eur_sell DECIMAL(5,2),
-    rur_buy DECIMAL(5,2),
-    rur_sell DECIMAL(5,2),
-    datetime DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-endef
 
 export CURRENCY_MIGRATION_SCRIPT
 migrate_currency_data:
@@ -55,40 +43,17 @@ remigrate:
 
 export FLASK_DEBUG=1
 export TEMPLATES_AUTO_RELOAD=1
-apollo:
+run:
 	cd apollo/ && flask run --host=0.0.0.0
 
-apollo-pip:
-	pip install -Ur deploy/requirements/apollo.dev.txt
+pip:
+	pip install -Ur requirements/apollo.dev.txt
 
-apollo-venv:
+venv:
 	rm -rf ../venv/apollo/
 	virtualenv -p python3.8 --no-site-packages --prompt=apollo- ../venv/apollo
 
-apollo-check:
+check:
 	black --line-length 89 --target-version py38 apollo/
 	isort apollo/**/*.py
 	flake8 apollo/
-
-export FLASK_DEBUG=1
-export TEMPLATES_AUTO_RELOAD=1
-helios:
-	cd helios/ && flask run --host=0.0.0.0
-
-helios-build:
-	p4a apk --private=$$(pwd)/helios --sdk-dir=$$HOME/android/home/ --ndk-dir=$$HOME/android/ndk/android-ndk-r21b-linux-x86_64/android-ndk-r21b
-
-helios-clean:
-	p4a clean builds
-
-helios-pip:
-	pip install -Ur deploy/requirements/helios.dev.txt
-
-helios-venv:
-	rm -rf ../venv/helios/
-	virtualenv -p python3.8 --no-site-packages --prompt=helios- ../venv/helios
-
-helios-check:
-	black --line-length 89 --target-version py38 helios/
-	isort helios/**/*.py
-	flake8 helios/

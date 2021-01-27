@@ -1,14 +1,15 @@
-import logging
+import logging.config
 
 import Adafruit_DHT
 
-from apollo.conf import (DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW,
-                         SMS_CHANNEL, SMS_HIGH, SMS_LOW, SPI_DEVICE, SPI_PORT)
-from apollo.database.sensors import save_sensors_data
+from apollo.conf import (
+    DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW,
+    SMS_CHANNEL, SMS_HIGH, SMS_LOW, SPI_DEVICE, SPI_PORT, LOGGING
+)
+from apollo.database.database import save_sensors_data
 from apollo.library import MCP3002
-from apollo.utils.logger import init_logger
 
-init_logger()
+logging.config.dictConfig(LOGGING)
 logger = logging.getLogger(__name__)
 
 mcp3002 = MCP3002(SPI_PORT, SPI_DEVICE)

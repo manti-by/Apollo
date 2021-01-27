@@ -5,7 +5,8 @@ from datetime import datetime
 from flask import request
 from pytz import timezone, utc
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "db.sqlite")
+from app.conf import DB_PATH
+
 PERIODS = {"live": 1, "hourly": 12, "daily": 12 * 24, "weekly": 12 * 24 * 7}
 DT_FORMAT = "%Y-%m-%d %H:%M:%S"
 LOCAL_TZ = timezone("Europe/Minsk")

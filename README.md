@@ -56,9 +56,11 @@ Setup
         $ sudo ln -s /home/pi/apollo/src/svctl.conf /etc/supervisorctl/conf.d/apollo.conf
         $ sudo supervisorctl update
 
-5. Install worker crontab
+5. Install crontabs
 
-        */5 * * * *    /home/pi/apollo/venv/bin/python /home/pi/apollo/src/app/worker.py
+        */5 * * * *       /home/pi/apollo/venv/bin/python /home/pi/apollo/src/app/worker.py
+        2-59/5 * * * *    raspistill -o /home/pi/images/$(date +\%Y-\%m-\%d_\%H-\%M-\%S).jpg
+        0 * * * *         find /home/pi/images -name '*.jpg' -type f -mmin +480 -delete
 
 
 Notes

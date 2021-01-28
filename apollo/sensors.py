@@ -6,7 +6,7 @@ from apollo.conf import (
     DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW,
     SMS_CHANNEL, SMS_HIGH, SMS_LOW, SPI_DEVICE, SPI_PORT, LOGGING
 )
-from apollo.database.database import save_sensors_data
+from apollo.database import save_sensors_data
 from apollo.library import MCP3002
 
 logging.config.dictConfig(LOGGING)

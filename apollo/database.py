@@ -8,8 +8,8 @@ def get_sensors_data() -> dict:
         session.row_factory = sqlite3.Row
         cursor = session.cursor()
         cursor.execute(
-            "SELECT temp, humidity, moisture, luminosity, datetime "
-            "FROM data ORDER BY datetime DESC LIMIT 1"
+            "SELECT temp, humidity, moisture, luminosity"
+            "FROM data ORDER BY datetime DESC"
         )
         session.commit()
         return cursor.fetchone()

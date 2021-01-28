@@ -1,7 +1,13 @@
+import os
+
 from pytz import timezone
 
+HELIOS_URL = "https://helios.manti.by"
+HELIOS_USER = os.environ.get("HELIOS_USER")
+HELIOS_PASS = os.environ.get("HELIOS_PASS")
 
 DB_PATH = "/home/pi/apollo/data/db.sqlite"
+PHOTO_PATH = "/home/pi/apollo/data/photo/"
 
 DT_FORMAT = "%Y-%m-%d %H:%M:%S"
 LOCAL_TZ = timezone("Europe/Minsk")

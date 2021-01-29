@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS data (
     temp INTEGER,
     humidity DECIMAL(5,2),
     moisture DECIMAL(5,2),
-    moisture DECIMAL(5,2),
     luminosity DECIMAL(5,2),
     datetime DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -30,6 +29,6 @@ venv:
 	virtualenv -p python3.8 --no-site-packages --prompt=apollo- ../venv/apollo
 
 check:
-	black --line-length 89 --target-version py38 apollo/
-	isort apollo/**/*.py
+	black --line-length 120 --target-version py38 apollo/
+	isort apollo/*.py
 	flake8 apollo/

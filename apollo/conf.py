@@ -47,7 +47,5 @@ LOGGING = {
             "formatter": "standard",
         },
     },
-    "loggers": {
-        "": {"handlers": ["console", "filesystem"], "level": "DEBUG", "propagate": True}
-    },
+    "loggers": {"": {"handlers": ["console", "filesystem"], "level": "DEBUG", "propagate": True}},
 }

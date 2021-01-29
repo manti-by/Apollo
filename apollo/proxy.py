@@ -1,9 +1,11 @@
 import glob
 import logging.config
 import os
+
 import requests
 
-from apollo.conf import LOGGING, HELIOS_URL, HELIOS_USER, HELIOS_PASS, PHOTO_PATH
+from apollo.conf import (HELIOS_PASS, HELIOS_URL, HELIOS_USER, LOGGING,
+                         PHOTO_PATH)
 from apollo.database import get_sensors_data
 
 logging.config.dictConfig(LOGGING)

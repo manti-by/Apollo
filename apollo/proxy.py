@@ -44,9 +44,11 @@ if __name__ == "__main__":
         logger.error("Can't retrieve token, please check helios credentials")
         exit(-1)
 
-    headers = {"Content-Type": "application/json", "Http_Authorization": token}
-    data = get_sensors_data()
-    response = requests.post(f"{HELIOS_URL}/api/v1/sensors/", json=data, headers=headers)
+    response = requests.post(
+        f"{HELIOS_URL}/api/v1/sensors/",
+        json=get_sensors_data(),
+        headers={"Content-Type": "application/json", "Authorization": f"Token {token}"}
+    )
     if not response.ok:
         logger.error(f"Error when sending sensors data: {response.reason}")
         delete_token()
@@ -58,10 +60,10 @@ if __name__ == "__main__":
         exit(-1)
 
     latest_file = max(list_of_files, key=os.path.getctime)
-    files = {"file": open(latest_file, "rb")}
-    headers["Content-Type"] = "multipart/form-data"
     response = requests.post(
-        f"{HELIOS_URL}/api/v1/sensors/photo/", files=files, headers=headers
+        f"{HELIOS_URL}/api/v1/sensors/photos/",
+        files={"file": open(latest_file, "rb")},
+        headers={"Authorization": f"Token {token}"}
     )
     if not response.ok:
         logger.error(f"Error when uploading photo: {response.reason}")

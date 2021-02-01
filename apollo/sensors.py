@@ -4,9 +4,18 @@ from typing import Tuple
 
 import Adafruit_DHT
 
-from apollo.conf import (DHT22_CHANNEL, LMS_CHANNEL, LMS_HIGH, LMS_LOW,
-                         LOGGING, SMS_CHANNEL, SMS_HIGH, SMS_LOW, SPI_DEVICE,
-                         SPI_PORT)
+from apollo.conf import (
+    DHT22_CHANNEL,
+    LMS_CHANNEL,
+    LMS_HIGH,
+    LMS_LOW,
+    LOGGING,
+    SMS_CHANNEL,
+    SMS_HIGH,
+    SMS_LOW,
+    SPI_DEVICE,
+    SPI_PORT,
+)
 from apollo.database import save_sensors_data
 from apollo.library import MCP3002
 
@@ -37,4 +46,8 @@ if __name__ == "__main__":
     save_sensors_data(temp, humidity, moisture, luminosity)
 
     message = "Temp: {:0.2f} *C, humidity: {:d}%, moisture: {:d}%, luminosity: {:d}%"
-    logger.info(message.format(int(temp), Decimal(humidity), Decimal(moisture), Decimal(luminosity)))
+    logger.info(
+        message.format(
+            int(temp), Decimal(humidity), Decimal(moisture), Decimal(luminosity)
+        )
+    )

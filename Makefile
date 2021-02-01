@@ -24,6 +24,5 @@ venv:
 	virtualenv -p python3.8 --prompt=apollo- ../venv/apollo
 
 check:
-	black --line-length 120 --target-version py38 apollo/
-	isort apollo/*.py
-	flake8 apollo/
+	black --target-version py38 apollo/
+	flake8

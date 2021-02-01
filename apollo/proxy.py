@@ -40,13 +40,13 @@ def delete_token():
 
 if __name__ == "__main__":
     token = get_token()
-    if token is None:
+    if not token:
         logger.error("Can't retrieve token, please check helios credentials")
         exit(-1)
 
-    headers = {"Content-Type": "application/json", "Authorization": token}
+    headers = {"Content-Type": "application/json", "Http_Authorization": token}
     data = get_sensors_data()
-    response = requests.post(f"{HELIOS_URL}/api/sensors/", json=data, headers=headers)
+    response = requests.post(f"{HELIOS_URL}/api/v1/sensors/", json=data, headers=headers)
     if not response.ok:
         logger.error(f"Error when sending sensors data: {response.reason}")
         delete_token()
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     files = {"file": open(latest_file, "rb")}
     headers["Content-Type"] = "multipart/form-data"
     response = requests.post(
-        f"{HELIOS_URL}/api/sensors/photo/", files=files, headers=headers
+        f"{HELIOS_URL}/api/v1/sensors/photo/", files=files, headers=headers
     )
     if not response.ok:
         logger.error(f"Error when uploading photo: {response.reason}")

@@ -4,12 +4,19 @@ from decimal import Decimal
 from apollo.conf import DB_PATH
 
 
+def dict_factory(cursor, row):
+    result = {}
+    for idx, col in enumerate(cursor.description):
+        result[col[0]] = row[idx]
+    return result
+
+
 def get_sensors_data() -> dict:
     with sqlite3.connect(DB_PATH) as session:
-        session.row_factory = sqlite3.Row
+        session.row_factory = dict_factory
         cursor = session.cursor()
         cursor.execute(
-            "SELECT temp, humidity, moisture, luminosity"
+            "SELECT temp, humidity, moisture, luminosity "
             "FROM data ORDER BY datetime DESC"
         )
         session.commit()

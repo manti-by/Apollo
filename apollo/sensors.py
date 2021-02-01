@@ -35,8 +35,8 @@ def get_luminosity_level() -> float:
 
 
 def get_temp_humidity() -> Tuple[float, int]:
-     humidity, temp = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, DHT22_CHANNEL)
-     return round(humidity, 2), int(temp)
+    humidity, temp = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, DHT22_CHANNEL)
+    return round(humidity, 2), int(temp)
 
 
 if __name__ == "__main__":
@@ -45,5 +45,6 @@ if __name__ == "__main__":
     humidity, temp = get_temp_humidity()
     save_sensors_data(temp, humidity, moisture, luminosity)
 
-    logger.info(f"Temp: {temp} *C, humidity: {humidity}, moisture: {moisture}, luminosity: {luminosity}")
-
+    logger.info(
+        f"Temp: {temp} *C, humidity: {humidity}, moisture: {moisture}, luminosity: {luminosity}"
+    )

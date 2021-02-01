@@ -47,7 +47,7 @@ if __name__ == "__main__":
     response = requests.post(
         f"{HELIOS_URL}/api/v1/sensors/",
         json=get_sensors_data(),
-        headers={"Content-Type": "application/json", "Authorization": f"Token {token}"}
+        headers={"Content-Type": "application/json", "Authorization": f"Token {token}"},
     )
     if not response.ok:
         logger.error(f"Error when sending sensors data: {response.reason}")
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     response = requests.post(
         f"{HELIOS_URL}/api/v1/sensors/photos/",
         files={"file": open(latest_file, "rb")},
-        headers={"Authorization": f"Token {token}"}
+        headers={"Authorization": f"Token {token}"},
     )
     if not response.ok:
         logger.error(f"Error when uploading photo: {response.reason}")
